@@ -1,0 +1,5 @@
+CREATE TABLE `jobby_db`.`state` ( `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `jobs` INT(10) UNSIGNED NOT NULL , `created_at` DATETIME NULL , `updated_at` DATETIME NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+INSERT INTO `state` (`id`, `name`, `jobs`, `created_at`, `updated_at`) VALUES (NULL, 'California', '125', '2022-04-04 08:04:00.000000', '2022-04-04 08:04:00.000000');
+INSERT INTO `state` (`id`, `name`, `jobs`, `created_at`, `updated_at`) VALUES (NULL, 'Austin', '200', '2022-04-04 08:05:07.000000', '2022-04-04 08:05:07.000000');
+INSERT INTO `state` (`id`, `name`, `jobs`, `created_at`, `updated_at`) VALUES (NULL, 'Tulsa', '190', '2022-04-04 08:05:44.000000', '2022-04-04 08:05:44.000000');
+INSERT INTO `state` (`id`, `name`, `jobs`, `created_at`, `updated_at`) VALUES (NULL, 'Los Angeles', '25', '2022-04-04 08:07:07.000000', '2022-04-04 08:07:07.000000');

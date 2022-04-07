@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 60%;
+            margin: 40px;
+        }
+        .tag-container {
+            border: 2px solid #ccc;
+            padding: 10px;
+            border-radius:5px;
+            display: flex;
+        }
+        .tag-container .tag{
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            border-radius: 3px;
+            background-color: #f2f2f2;
+
+        }
+    </style>
+</head>
+<body>
+    <form action="get-tags" method="post">
+        <div class="container">
+            <div class="tag-container" name="tags"  >
+                <div class="tag">
+                    <span>Tag</span>
+                </div>
+                <div class="tag">
+                    <span>Tag</span>
+                </div>
+                <div class="tag">
+                    <span>Tag</span>
+                </div>
+            </div>
+        <button type="submit">Get</button>
+    </div>
+
+    </form>
+    
+</body>
+</html>
