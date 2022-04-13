@@ -1,4 +1,4 @@
-const models = require('../models');
+const models = require('../../models');
 
 const categoryController = {
     categoryFullList: async(req, res) => {

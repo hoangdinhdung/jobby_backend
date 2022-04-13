@@ -21,12 +21,12 @@ app.get("/", (req, res) => {
 });
 
 //import routes
-const adminRoute = require('./src/routes/admin');
-const stateRoute = require('./src/routes/state');
-const jobRoute = require('./src/routes/job');
-const categoryRoute = require('./src/routes/category');
-const candidateRoute = require('./src/routes/candidate');
-const projectRoute = require('./src/routes/project');
+const adminRoute = require('./src/routes/test_api/admin');
+const stateRoute = require('./src/routes/test_api/state');
+const jobRoute = require('./src/routes//test_api/job');
+const categoryRoute = require('./src/routes/test_api/category');
+const candidateRoute = require('./src/routes/test_api/candidate');
+const projectRoute = require('./src/routes/test_api/project');
 
 //create Routes
 app.use('/admin', adminRoute);

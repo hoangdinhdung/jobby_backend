@@ -1,5 +1,5 @@
 // REQUIRES
-const models = require('../models');
+const models = require('../../models');
 const bcrypt = require('bcryptjs');
 
 // CANDIDATE CONTROLLER

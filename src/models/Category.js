@@ -3,13 +3,13 @@ module.exports = (sequelize, DataTypes) =>{
     const alias = 'Category';
     const cols = {
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         jobs: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         image: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         }
     }
     const config = {

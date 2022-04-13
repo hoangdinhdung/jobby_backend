@@ -1,5 +1,5 @@
 // REQUIRES
-const models = require('../models');
+const models = require('../../models');
 const { Op } = require("sequelize");
 
 // JOB CONTROLLER
@@ -8,6 +8,7 @@ const jobController = {
         const jobList = await models.Job.findAll({
             logging: false,
             //attributes: ['expired_at']
+            //include: ['candidate']
         });
         res.json({
             jobList: jobList
@@ -178,12 +179,12 @@ const jobController = {
 
     jobUpdate: async (req, res)=>{
         try{
-            const expired_at_list = await models.Job.findAll({
+            var expired_at_list = await models.Job.findAll({
                 attributes: ['id','expired_at'],
                 logging: false
             });
 
-            // expired_at_list[0].expired_at = "3 August 2018"
+            console.log(expired_at_list[0])
             for(let i=0; i<expired_at_list.length;i++){
                 const now = new Date();
                 const expire = new Date(expired_at_list[i].expired_at);
@@ -201,8 +202,11 @@ const jobController = {
                     })
                 }
             }
-            res.redirect('/job')
-            //
+            // res.redirect('/job')
+            res.json({
+                    expired_at_list,
+                    expired_at_list
+            })
         }catch(err){
 
         }

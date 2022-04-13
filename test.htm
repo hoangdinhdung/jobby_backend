@@ -28,24 +28,24 @@
         }
     </style>
 </head>
-<body>
-    <form action="get-tags" method="post">
-        <div class="container">
-            <div class="tag-container" name="tags"  >
-                <div class="tag">
-                    <span>Tag</span>
-                </div>
-                <div class="tag">
-                    <span>Tag</span>
-                </div>
-                <div class="tag">
-                    <span>Tag</span>
-                </div>
-            </div>
-        <button type="submit">Get</button>
-    </div>
+<body onload = "showPosition()">    
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7448.525578403022!2d105.80015307657597!3d21.022168644007593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab5d41745403%3A0xbf7717e28fe3bbbb!2zTMOhbmcgVGjGsOG7o25nLCDEkOG7kW5nIMSQYSwgSGFub2ksIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1649407504350!5m2!1sen!2s"
+    <br>
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7448.525578403022!2d105.80015307657597!3d21.022168644007593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab5cd18746cf%3A0x19170837296b14ae!2sLang%20Pagoda!5e0!3m2!1sen!2s!4v1649407643787!5m2!1sen!2s
+    <br>
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7448.525578403022!2d105.80015307657597!3d21.022168644007593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab43bd13ba09%3A0xa5df90f139f710e!2zQsOqzKNuaCBWacOqzKNuIEdpYW8gVGjDtG5nIFbDosyjbiBUYcyJaQ!5e0!3m2!1sen!2s!4v1649407755780!5m2!1sen!2s"
+    <iframe id="location" name="address" style="width:700px; height:700px; " src = >  
+    </iframe>    
+    <p id="mapholder"></p>
+    <script type="text/javascript" language="javascript">  
+        function showPosition(position) {
+            let latlon = position.coords.latitude + "," + position.coords.longitude;
 
-    </form>
-    
-</body>
+            let img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_KEY";
+
+            document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+        }
+    </script>  
+    <input type="button" value="click Me"/>  
+    </body>
 </html>

@@ -4,88 +4,56 @@ module.exports = (sequelize, DataTypes) =>{
 
     const cols = {
         image:{
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         first_name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         last_name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         email: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         password:{
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         description: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         tagline: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         skills: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         availability:{
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         experience_level:{
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         pay_rate:{
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         languages:{
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
-        location:{
-            type: DataTypes.STRING
-        },
-        company_site:{
-            type: DataTypes.STRING
-        },
-        blog_site:{
-            type: DataTypes.STRING
-        },
-        portfolio_site:{
-            type: DataTypes.STRING
+        id_location:{
+            type: DataTypes.STRING,
         },
         rating:{
-            type: DataTypes.DOUBLE(1,2)
+            type: DataTypes.DOUBLE(1,2),
         },
-        facebook:{
-            type: DataTypes.STRING
-        },
-        twitter:{
-            type: DataTypes.STRING
-        },
-        google:{
-            type: DataTypes.STRING
-        },
-        youtube:{
-            type: DataTypes.STRING
-        },
-        linkedin:{
-            type: DataTypes.STRING
-        },
-        instagram:{
-            type: DataTypes.STRING
-        },
-        dribbble:{
-            type: DataTypes.STRING
-        },
-        behance:{
-            type: DataTypes.STRING
-        },
-        github:{
-            type: DataTypes.STRING
+        status:{
+            type: DataTypes.STRING,
         }
     };
 
-    const config = { tableName: 'candidates'};
+    const config = { tableName: 'candidate'};
 
     const Candidate = sequelize.define(alias, cols, config);
+    // start config foreign key
 
     Candidate.associate = (models) => {
         Candidate.hasMany(models.Apply, {
@@ -98,5 +66,8 @@ module.exports = (sequelize, DataTypes) =>{
             foreignKey: 'id_candidate'
         })
     }
+
+    // end config foreign key
+
     return Candidate;
 }
