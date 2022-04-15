@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    font-size: 62.5%;
+    
+}
+:root{
+    --color-main:#ff4500;
+    --color-text:#847577;
+    --color-border:#e1e1e1
+}

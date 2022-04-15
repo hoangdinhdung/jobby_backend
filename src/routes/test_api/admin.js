@@ -6,7 +6,7 @@ const router = express.Router();
 const adminController = require("../../controllers/test_api/AdminController");
 
 //ROUTES
-router.get('/api/v1/', adminController.adminFullList);
+router.get('/', adminController.adminFullList);
 
 //EXPORTS 
 module.exports = router;

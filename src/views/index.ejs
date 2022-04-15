@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head',  {title: 'Trang Chủ' }) %>
+</head>
+<body>
+    <%- include('./partials/header')%>
+<section class="body-main">
+    <%- include('./partials/searchbar1') %>
+
+    <%- include('./partials/slider') %>
+
+    <!-- START Các thông số -->
+    <div class="achivements">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+              <h3 class="text-archivements"> <%= Math.floor(data.register_member / 1000000) %>M Registered Members</h3>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+              <h3 class="text-archivements"> <%= Math.floor(data.jobs_found / 1000) %>K Jobs Found</h3>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+              <h3 class="text-archivements"> <%= Math.floor(data.best_companies/ 100)/10 %>K Best Companies</h3>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+              <button class="btn btn-achivements">POST A JOBS</button>
+              <button class="btn btn-achivements">POST A WORK</button>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- END Các thông số -->
+
+    <!-- START document -->
+    <div class="offer">
+        <div class="container">
+          <h2 class="title-main">What We offers</h2>
+          <h6 class="decripsion-main">Offering the Best Deal</h6>
+          <img src="./image/Line.png" alt="" srcset="">
+          <div class="row">
+            <div class="card-group">
+                <% for(offer of offers) { %>
+                <div class="col-md-12 card border ">
+                    <img src="./image/Line-card.png" alt="line" srcset="">
+                    <h3 class="card-title"> <%= offer.title%> </h3>
+                    <p class="des-card">
+                    <%= offer.description %>
+                    </p>
+                    <a class="read-more" href="#">Read More <i class="fa-solid fa-angles-right"></i></a>
+                </div>
+                <% } %>
+
+              <!-- <div class="col-md-12 card border ">
+                <img src="./image/Line-card.png" alt="line" srcset="">
+                <h3 class="card-title">Apply for a Good Job</h3>
+                <span class="des-card">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabi dictum commodo mi.
+                </span>
+                <a class="read-more" href="#">Read More <i class="fa-solid fa-angles-right"></i></a>
+              </div>
+              <div class="col-md-12 card border ">
+                <img src="./image/Line-card.png" alt="line" srcset="">
+                <h3 class="card-title">More Quality Hires</h3>
+                <span class="des-card">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabi dictum commodo mi.
+                </span>
+                <a class="read-more" href="#">Read More <i class="fa-solid fa-angles-right"></i></a>
+              </div>
+              <div class="col-md-12 card border ">
+                <img src="./image/Line-card.png" alt="line" srcset="">
+                <h3 class="card-title">Choose Your Working Hours</h3>
+                <span class="des-card">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabi dictum commodo mi.
+                </span>
+                <a class="read-more" href="#">Read More <i class="fa-solid fa-angles-right"></i></a>
+              </div> -->
+    
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END document -->
+
+      <!-- START Job Mới Nhất -->
+      <div class="find-job">
+        <div class="container">
+          <h2 class="title-main">Find Latest Jobs</h2>
+          <h6 class="decripsion-main">Your Job for a Future</h6>
+          <img src="./image/Line.png" alt="" srcset="">
+          <div class="row">
+            <div class="card-group">
+              <% for(job of jobs) { %>
+              <div class="profile-item border">
+                <% if( job.candidate.id != 0){ %> <!-- RENDER CANDIDATE -->
+                <div class="profile-info">
+                  <div class="profile-top d-flex">
+                    <div class="profile-avt min-div-profile-top">
+                      <img src="./image/<%= job.candidate.image %>" style = "border-radius: 50%;" alt="" srcset="">
+                    </div>
+                    <div class="profile-top-mid min-div-profile-top">
+                      <p class="profile-name"> <%= job.candidate.first_name %> <%= job.candidate.last_name %></p> </p>
+                      <span class="location"><i class="fa-solid fa-location-dot"></i> <%= job.location %> </span>
+                    </div>
+                    <div class="profile-top-right min-div-profile-top">
+                      <% if( job.hourly === 1){ %>
+                      <p class="profile-cost">$ <%= job.salary_min %>/ hr</p>
+                      <% } else { %>
+                        <p class="profile-cost">$<%= job.salary_min%></p>
+                      <% } %>
+
+                      <% if( job.availability == "Full Time") {%>
+                        <span class="badge badge-pill badge-success badge-status"> <%= job.availability %> </span>
+                      <% } else { %>
+                        <span class="badge badge-pill badge-success badge-status status-time"> <%= job.availability %> </span>
+                      <% } %>
+                    </div>
+                  </div>
+                  <h3 class="job-name"> <%= job.name %> </h3>
+                  <p class="des-profile-job"> <%= job.description.slice(0, 95) %>... </p>
+                  <div class="profile-skill">
+                    <% if( job.skills.split(",").length <= 3 ) { %>
+                      <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[0] %> </span>
+                      <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[1] %> </span>
+                      <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[2] %> </span>
+                    <% } else { %>
+                      <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[0] %> </span>
+                      <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[1] %></span>
+                      <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[2] %></span>
+                      <span class="badge badge-pill profile-skill-item skill-count"> +<%= job.skills.split(",").length - 3 %></span>
+                    <% } %>
+                  </div>
+                </div>
+                <div class="btn-group btn-group-profile" role="group" aria-label="Basic example">
+                  <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">APPLY NOW</button>
+                  <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">VIEW JOB</button>
+                  <button type="button" style="height:50px;Width:60px" class="btn   btn-profile-item-bookmark border">
+                    <a href="#" style="padding: 0;">
+                      <% if (job.bookmark.length > 0){ %>
+                        <i class="fa-solid  fa-heart"></i>
+                      <% } else {%>
+                        <i class="fa-solid unbookmark fa-heart"></i>
+                      <% } %>
+                    <a>
+                  </button>
+                </div>
+                <% } else if( job.company.id != 0 ) { %> <!-- RENDER COMPANY -->
+                  <div class="profile-info">
+                    <div class="profile-top d-flex">
+                      <div class="profile-avt min-div-profile-top">
+                        <img src="./image/<%= job.company.image %>" style = "border-radius: 50%;" alt="" srcset="">
+                      </div>
+                      <div class="profile-top-mid min-div-profile-top">
+                        <p class="profile-name"> <%= job.company.name %> </p>
+                        <span class="location"><i class="fa-solid fa-location-dot"></i> <%= job.location %> </span>
+                      </div>
+                      <div class="profile-top-right min-div-profile-top">
+                        <% if( job.hourly === 1){ %>
+                        <p class="profile-cost">$ <%= job.salary_min %>/ hr</p>
+                        <% } else { %>
+                          <p class="profile-cost">$<%= job.salary_min%></p>
+                        <% } %>
+  
+                        <% if( job.availability == "Full Time") {%>
+                          <span class="badge badge-pill badge-success badge-status"> <%= job.availability %> </span>
+                        <% } else { %>
+                          <span class="badge badge-pill badge-success badge-status status-time"> <%= job.availability %> </span>
+                        <% } %>
+                      </div>
+                    </div>
+                    <h3 class="job-name"> <%= job.name %> </h3>
+                    <p class="des-profile-job"> <%= job.description.slice(0, 85) %>... </p>
+                    <div class="profile-skill">
+                      <% if( job.skills.split(",").length <= 3 ) { %>
+                        <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[0] %> </span>
+                        <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[1] %> </span>
+                        <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[2] %> </span>
+                      <% } else { %>
+                        <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[0] %> </span>
+                        <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[1] %></span>
+                        <span class="badge badge-pill profile-skill-item"> <%= job.skills.split(",")[2] %></span>
+                        <span class="badge badge-pill profile-skill-item skill-count"> +<%= job.skills.split(",").length - 3 %></span>
+                      <% } %>
+                    </div>
+                  </div>
+                  <div class="btn-group btn-group-profile" role="group" aria-label="Basic example">
+                    <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">APPLY NOW</button>
+                    <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">VIEW JOB</button>
+                    <button type="button" style="height:50px;Width:60px" class="btn btn-profile-item-bookmark border"><a href="https://code-boxx.com" style="padding: 0;"><i class="fa-solid unbookmark fa-heart"></i><a></button>
+                  </div>
+                <% } %>
+              </div>
+              <% } %>
+              <!-- <div class="profile-item border">
+                <div class="profile-info">
+                  <div class="profile-top d-flex">
+                    <div class="profile-avt min-div-profile-top">
+                    <img src="./image/avt.png" alt="" srcset="">
+      
+                    </div>
+                    <div class="profile-top-mid min-div-profile-top">
+                      <p class="profile-name">John Doe</p>
+                      <span class="location"><i class="fa-solid fa-location-dot"></i> New York City</span>
+                    </div>
+                    <div class="profile-top-right min-div-profile-top">
+                      <p class="profile-cost">$50 / hr</p>
+                      <span class="badge badge-pill badge-success badge-status status-time">Part Time</span>
+                    </div>
+                  </div>
+                  <h3 class="job-name">UX Designer</h3>
+                  <p class="des-profile-job">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabi dictum commodo mi.</p>
+                  <div class="profile-skill">
+                    <span class="badge badge-pill profile-skill-item">UX</span>
+                    <span class="badge badge-pill profile-skill-item">UI</span>
+                    <span class="badge badge-pill profile-skill-item">Photoshop</span>
+                    <span class="badge badge-pill profile-skill-item skill-count">+4</span>
+                  </div>
+                </div>
+                <div class="btn-group btn-group-profile" role="group" aria-label="Basic example">
+                  <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">APPLY NOW</button>
+                  <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">VIEW JOB</button>
+                  <button type="button" style="height:50px;Width:60px" class="btn btn-profile-item border"><a href="https://code-boxx.com" style="padding: 0;"><i class="fa-solid fa-heart"></i><a></button>
+                </div>
+              </div>
+              <div class="profile-item border">
+                <div class="profile-info">
+                  <div class="profile-top d-flex">
+                    <div class="profile-avt min-div-profile-top">
+                    <img src="./image/avt.png" alt="" srcset="">
+      
+                    </div>
+                    <div class="profile-top-mid min-div-profile-top">
+                      <p class="profile-name">John Doe</p>
+                      <span class="location"><i class="fa-solid fa-location-dot"></i> New York City</span>
+                    </div>
+                    <div class="profile-top-right min-div-profile-top">
+                      <p class="profile-cost">$900</p>
+                      <span class="badge badge-pill badge-success badge-status">Fulltime</span>
+                    </div>
+                  </div>
+                  <h3 class="job-name">UX Designer</h3>
+                  <p class="des-profile-job">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabi dictum commodo mi.</p>
+                  <div class="profile-skill">
+                    <span class="badge badge-pill profile-skill-item">UX</span>
+                    <span class="badge badge-pill profile-skill-item">UI</span>
+                    <span class="badge badge-pill profile-skill-item">Photoshop</span>
+                    <span class="badge badge-pill profile-skill-item skill-count">+4</span>
+                  </div>
+                </div>
+                <div class="btn-group btn-group-profile" role="group" aria-label="Basic example">
+                  <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">APPLY NOW</button>
+                  <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">VIEW JOB</button>
+                  <button type="button" style="height:50px;Width:60px" class="btn btn-profile-item border"><a href="https://code-boxx.com" style="padding: 0;"><i class="fa-solid fa-heart"></i><a></button>
+                </div>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div> 
+      <!-- END Job Mới Nhất -->
+
+      <!-- START Danh sách category -->
+      <div class="choose-job">
+        <div class="container">
+          <div class="choose-job-top">
+            <h2 class="title-main">Choose Category</h2>
+            <h6 class="decripsion-main">Your Job for a Future</h6>
+            <img src="./image/Line.png" alt="" srcset="">
+          </div>
+          <div class="row">
+            <% for(category of categories) { %>
+            <div class="col-md-3 choose-job-item border-top-0">
+              <div class="icon-choose-job border rounded-circle">
+                <i class="fa-solid fa-<%= category.image %>"></i>
+              </div>
+              <h3 class="title-choose-job"><%= category.name %></h3>
+              <h6 class="amount-choose-job"><%= category.jobs %></h6>
+            </div>
+            <% } %>
+              <!-- <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-  "></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+              </div>
+              <div class="col-md-3 choose-job-item border-top-0">
+                <div class="icon-choose-job border rounded-circle">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="title-choose-job">Education & Training</h3>
+                <h6 class="amount-choose-job">150 Jobs</h6>
+            </div> -->
+    
+          </div>
+        </div>
+      </div>
+      <!-- END Danh sách category -->
+
+      <!-- START Danh sach ung vien -->
+      <div class="feature-candidates">
+        <div class="container">
+            <div class="choose-job-top">
+              <h2 class="title-main">Featured Candidates</h2>
+              <h6 class="decripsion-main">Discover, Intelligent, Experienced, Professional, Trustworthy, </h6>
+              <img src="./image/Line.png" alt="" srcset="">
+            </div>
+            <div class="row">
+              <div class="feature-item border col-md-4">
+                <div class="feature-info text-center">
+                  <div class="feature-top">
+                    <img src="./image/avt.png" alt="" srcset="">
+                    <!-- <span class="featyre-cost">$50/h</span> -->
+                  </div>
+                  <div class="feature-bot d-flex justify-content-around">
+                  <div class="feature-bot-left mr-3">
+                    <h4 class="feature-text">Rating</h4>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="badge rounded-pill bg-warning text-dark">5 </span>
+                  </div>
+                  <div class="feature-bot-right">
+                    <h4 class="feature-text">Location</h4>
+                    <span class="feature-location-text"><i class="fa-solid fa-location-dot"></i>&ensp;New York</span>
+                  </div>
+        
+                </div>
+                <div class="btn-group btn-group-feature" role="group" aria-label="Basic example">
+                  <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">APPLY NOW</button>
+                  <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">VIEW JOB</button>
+                  <button type="button" style="height:50px;Width:60px" class="btn btn-profile-item border"><i class="fa-solid fa-heart"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="feature-item border col-md-4">
+              <div class="feature-info text-center ">
+              <div class="feature-top">
+                <img src="./image/avt.png" alt="" srcset="">
+                <!-- <span class="featyre-cost">$50/h</span> -->
+              </div>
+              <div class="feature-bot d-flex justify-content-around">
+                <div class="feature-bot-left">
+                  <h4 class="feature-text">Rating</h4>
+                  <span class="fa fa-star rating checked"></span>
+                  <span class="fa fa-star rating checked"></span>
+                  <span class="fa fa-star ratingchecked"></span>
+                  <span class="fa fa-star rating"></span>
+                  <span class="fa fa-star rating"></span>
+                  <span class="badge rounded-pill text-white bg-checked">5 </span>
+                </div>
+                <div class="feature-bot-right">
+                  <h4 class="feature-text">Location</h4>
+                  <span class="feature-location-text"><i class="fa-solid fa-location-dot"></i>&ensp;New York</span>
+                </div>
+        
+              </div>
+              <div class="btn-group btn-group-feature" role="group" aria-label="Basic example">
+                <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">APPLY NOW</button>
+                <button type="button" style="height:50px;width:150px" class="btn btn-profile-item border">VIEW JOB</button>
+                <button type="button" style="height:50px;Width:60px" class="btn btn-profile-item border"><i class="fa-solid fa-heart"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="feature-item border col-md-4">
+            <div class="feature-info text-center">
+            <div class="feature-top">
+              <img src="./image/avt.png" alt=""  srcset="">
+              <!-- <span class="feature-cost">$50/h</span> -->
+            </div>
+            <div class="feature-bot d-flex justify-content-around">
+              <div class="feature-bot-left ">
+                <h4 class="feature-text">Rating</h4>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="badge rounded-pill bg-warning text-dark">5 </span>
+              </div>
+              <div class="feature-bot-right">
+                <h4 class="feature-text">Location</h4>
+                <span class="feature-location-text"><i class="fa-solid fa-location-dot"></i>&ensp;New York</span>
+              </div>
+        
+            </div>
+                <div class="btn-group btn-group-feature" role="group" aria-label="Basic example">
+                  <button type="button" style="height:50px;width:150px;font-size: 1.6rem;font-weight:550;" class="btn border">APPLY NOW</button>
+                  <button type="button" style="height:50px;width:150px;font-size: 1.6rem;font-weight:550;" class="btn border">VIEW JOB</button>
+                  <button type="button" style="height:50px;Width:60px;font-size: 1.6rem;font-weight:550;" class="btn border"><i class="fa-solid fa-heart"></i></button>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="btn-feature">
+                <button type="button"  style="height:50px;width:200px;margin-top:20px;text-align: center;font-size: 1.6rem;font-weight:550;" >SEE ALL CANDIDATES</button>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- END Danh sách ứng viên -->
+
+      <!-- document post jobs and talent candidates -->
+      <div class="job-talent">
+        <div class="container">
+          
+          <div class="row">
+            <div class="job-talent-item">
+              <h3 class="job-talent-title">Post Jobs</h3>
+              <h6 class="job-talent-des">Quick and easy way to advertise.</h6>
+              <img src="./image/Line.png" alt="" srcset="">
+              <div class="job-talent-item-bot">
+                <p class="job-talent-des-detail">Post to search for candidates, apply for jobs, hire projects v.v.v...</p>
+                <% for(document of documents){ %>
+                  <% if(document.type === 'post job') { %>
+                  <h4 class="job-talent-bot-title"><i class="fa-regular fa-circle-check icon-job-talent"></i>&ensp;<%= document.title %></h4>
+                  <p class="job-talent-bot-detail"><%= document.description %></p>
+                  <% } %>
+                <% } %>
+              </div>
+              <div class="job-talent-btn-group">
+                <button class="btn job-talent-btn-item">POST A JOB</button>
+                <button class="btn job-talent-btn-item-gray">LEARN MORE</button>
+              </div>
+            </div>
+            
+            <div class="job-talent-item">
+              <h3 class="job-talent-title">Talened Candidates</h3>
+              <h6 class="job-talent-des">Get discoverd by companies looking to hire remote. </h6>
+              <img src="./image/Line.png" alt="" srcset="">
+              <div class="job-talent-item-bot">
+                <p class="job-talent-des-detail">Search talent candidates for your job, your project or your company</p>
+                <% for(document of documents){ %>
+                  <% if(document.type === 'talented candidates'){ %>
+                  <h4 class="job-talent-bot-title"><i class="fa-regular fa-circle-check icon-job-talent"></i>&ensp;<%= document.title %></h4>
+                  <p class="job-talent-bot-detail"> <%= document.description %> </p>
+                  <% } %>
+                <% } %>
+              </div>
+              <div class="job-talent-btn-group">
+                <button class="btn job-talent-btn-item">GET LISTED</button>
+                <button class="btn job-talent-btn-item-gray">LEARN MORE</button>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+    </div>
+    <!--  -->
+
+    <%- include('./partials/footer')%>
+
+    <%- include('./partials/javascript')%>
+</body>
+</html>

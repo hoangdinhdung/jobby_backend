@@ -58,12 +58,22 @@ module.exports = (sequelize, DataTypes) =>{
     Candidate.associate = (models) => {
         Candidate.hasMany(models.Apply, {
             as: 'apply',
-            foreignKey: 'id_candidate'
+            foreignKey: 'id_candidate',
         });
 
         Candidate.hasMany(models.Job, {
             as: 'job',
-            foreignKey: 'id_candidate'
+            foreignKey: 'id_candidate',
+        });
+
+        Candidate.hasMany(models.Bookmark, {
+            as: 'bookmark',
+            foreignKey: 'id_candidate',
+        });
+
+        Candidate.hasMany(models.Bookmark, {
+            as: 'bookmark_by',
+            foreignKey: 'id_candidate',
         })
     }
 

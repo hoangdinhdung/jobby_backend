@@ -1,11 +1,14 @@
-module.exports = (sequelize, Datatypes) => {
+module.exports = (sequelize, DataTypes) => {
     const alias = 'State';
     const cols = {
+        image: {
+            type: DataTypes.STRING,
+        },
         name:{
-            type: Datatypes.STRING
+            type: DataTypes.STRING
         },
         jobs:{
-            type: Datatypes.INTEGER
+            type: DataTypes.INTEGER
         }
     }
     const config = {

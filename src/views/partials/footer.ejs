@@ -1,0 +1,90 @@
+<section class="container-fluid footer ">  
+  <div class="row" style="height:130px"></div>
+  <li><hr class="dropdown-divider"></li>
+<!-- footer main -->
+    <div class="container">
+      <div class="row footer-main">
+        <div></div>
+        <!-- <div class="col-md-3 about-company">
+          <img src="./image/logo-footer.png" alt="logo">
+          <p class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus et diam blandit vehicula sit amet sed metus. Fusce condimentum non neque at fringilla. Aenean malesuada aliquet tincidunt.
+          </p>
+        </div> -->
+        <div class="col-md-3 about-company p-0">
+          <!-- <h3 class="title">About</h3>
+          <ul class="text">
+            <li> <a href="#">About us</a></li>
+            <li> <a href="#">Login</a></li>
+            <li> <a href="#">My Account</a></li>
+            <li> <a href="#">Contact</a></li>
+            <li> <a href="#">Privacy Policy</a></li>
+            <li> <a href="#">Term of use</a></li>
+          </ul> -->
+          <img src="./image/logo-footer.png" alt="logo">
+          <p class="text">
+            <% for(document of documents){ %>
+              <% if(document.type === 'introduce') { %>
+                <%= document.description %>
+                <br>
+              <% } %>        
+            <% } %>
+          </p>
+        </div>
+        <div class="col-md-3 about-link p-0 ">
+          <h3 class="title">About</h3>
+          <ul class="text">
+            <li> <a href="#">About us</a></li>
+            <li> <a href="#">Login</a></li>
+            <li> <a href="#">My Account</a></li>
+            <li> <a href="#">Contact</a></li>
+            <li> <a href="#">Privacy Policy</a></li>
+            <li> <a href="#">Term of use</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 for-companies p-0">
+          <h3 class="title">For Companies</h3>
+          <ul class="text">   
+            <li><a href="#">Browese Freelancers</a></li>
+            <li><a href="#">Post a Job</a></li>
+            <li><a href="#">Post a Project</a></li>
+            <li><a href="#">Pricing Plans</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 for-candidates p-0">
+          <h3 class="title">For Candidates</h3>
+          <ul class="text">
+            <li><a href="#">Browese Jobs</a></li>
+            <li> <a href="#">Job Alerts</a></li>
+            <li><a href="#">Applied Jobs</a></li>
+            <li><a href="#">Bookmarks</a></li>
+          </ul>
+        </div>
+    </div>
+    <!-- end footer-main -->
+  </div>
+<hr class="dropdown-divider" style="color:red">
+  <!-- footer-bot -->
+        <div class="container">
+          <div class="row footer-bot">
+            <div class="col-md-6">
+              <div class="footer-bot_left">
+                <p class="footer-bot-text"><i class="fa-solid fa-copyright"></i>&ensp;Copyright 2018 <a style="font-weight: 500;color:white;">Jobby</a> by <a style="color:#e24105">Gambol</a>. All Right Reserved.</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="footer-bot-right">
+                  <div class="footer-bot-right-left">
+                    <i class="fa-solid fa-globe"></i>&ensp;EN&ensp;<i class="fa-solid fa-caret-down"></i>
+                  </div>
+                  <div class="social-icon">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-google-plus-g"></i>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</section>

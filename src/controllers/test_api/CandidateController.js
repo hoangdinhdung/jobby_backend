@@ -42,20 +42,9 @@ const candidateController = {
                 experience_level: "",
                 pay_rate: 0,
                 languages: "",
-                location: "",
-                company_site: "",
-                blog_site: "",
-                portfolio_site: "",
+                id_location: 0,
                 rating: 0.0,
-                facebook: "",
-                twitter: "",
-                google: "",
-                youtube: "",
-                linkedin: "",
-                instagram: "",
-                dribbble: "",
-                behance: "",
-                github: ""
+                status: "active"
             }, {
                 logging: false
             });

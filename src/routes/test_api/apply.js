@@ -6,7 +6,7 @@ const router = express.Router();
 const applyController = require('../controllers/ApplyController');
 
 // ROUTES //
-router.get('/api/v1/', applyController.applyFullList);
+router.get('/', applyController.applyFullList);
 
 // EXPORTS //
 module.exports = router;

@@ -6,7 +6,7 @@ const router = express.Router();
 const categoryController = require('../../controllers/test_api/CategoryController');
 
 // ROUTER
-router.get('/api/v1/', categoryController.categoryFullList);
+router.get('/', categoryController.categoryFullList);
 
 // EXPORTS
 module.exports = router;

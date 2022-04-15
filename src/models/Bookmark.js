@@ -27,7 +27,37 @@ module.exports = (sequelize, DataTypes) => {
     const Bookmark = sequelize.define(alias, cols, config);
     
     // start config foreign key
+    Bookmark.associate = (models) => {
+        Bookmark.belongsTo(models.Job, {
+            as: 'job',
+            foreignKey: 'id_job',
+        });
 
+        Bookmark.belongsTo(models.Project, {
+            as: 'project',
+            foreignKey: 'id_project',
+        });
+
+        Bookmark.belongsTo(models.Company, {
+            as: 'company',
+            foreignKey: 'id_company',
+        });
+
+        Bookmark.belongsTo(models.Candidate, {
+            as: 'candidate',
+            foreignKey: 'id_candidate',
+        });
+
+        Bookmark.belongsTo(models.Candidate, {
+            as: 'candidate_by',
+            foreignKey: 'by_candidate',
+        });
+
+        Bookmark.belongsTo(models.Company, {
+            as: 'company_by',
+            foreignKey: 'by_company',
+        })
+    }
     // end config foreign key
 
     return Bookmark;

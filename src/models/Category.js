@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) =>{
         },
         image: {
             type: DataTypes.STRING,
-        }
+        },
     }
     const config = {
         tableName: 'category'

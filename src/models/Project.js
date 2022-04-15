@@ -59,7 +59,12 @@ module.exports = (sequelize, DataTypes) => {
     Project.asscoiate = (models) =>{
         Project.belongsTo(models.Candidate, {
             as: 'candidate',
-            foreignKey: 'id_candidate'
+            foreignKey: 'id_candidate',
+        });
+
+        Project.hasMany(models.Bookmark, {
+            as: 'bookmark',
+            foreignKey: 'id_project',
         })
     }
     

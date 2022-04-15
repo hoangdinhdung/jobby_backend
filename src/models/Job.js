@@ -38,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         skills: {
             type: DataTypes.STRING,
         },
+        file:{
+            type: DataTypes.STRING,
+        },
         views: {
             type: DataTypes.INTEGER,
         },
@@ -59,17 +62,27 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     const Job = sequelize.define(alias, cols, config);
-    
+
     // start config foreign key
     Job.associate = (models) => {
         Job.hasMany(models.Apply, {
             as: 'apply',
-            foreignKey: 'id_job'
-        })
+            foreignKey: 'id_job',
+        });
 
         Job.belongsTo(models.Candidate, {
             as: 'candidate',
-            foreignKey: 'id_candidate'
+            foreignKey: 'id_candidate',
+        });
+
+        Job.belongsTo(models.Company, {
+            as: 'company',
+            foreignKey: 'id_company',
+        });
+
+        Job.hasMany(models.Bookmark, {
+            as: 'bookmark',
+            foreignKey: 'id_job',
         })
     } 
     // end config foreign key

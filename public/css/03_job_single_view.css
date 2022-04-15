@@ -1,0 +1,21 @@
+/* .footer-top-left i{
+    color:var(--color-main)
+} */
+.footer-top{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 50px;
+
+}
+.fa-solid.fa-circle-check{
+    color:var(--color-main);
+    font-size: 1.4rem;
+}
+.footer-top-right {
+    max-width:470px;
+    justify-content:end
+
+}
+.footer-top-right input{
+    max-width:340px;
+}

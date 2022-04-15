@@ -51,7 +51,22 @@
 
     const Company = sequelize.define(alias, cols, config);
     // start config foreign key
+    Company.associate = (models) => {
+        Company.hasMany(models.Job, {
+            as: 'job',
+            foreignKey: 'id_company',
+        });
 
+        Company.hasMany(models.Bookmark, {
+            as: 'bookmark',
+            foreignKey: 'id_company',
+        });
+
+        Company.hasMany(models.Bookmark, {
+            as: 'bookmark_by',
+            foreignKey: 'id_company',
+        })
+    }
     // end config foreign key
     
     return Company;
