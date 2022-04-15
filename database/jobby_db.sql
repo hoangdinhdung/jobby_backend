@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2022 at 08:37 AM
+-- Generation Time: Apr 15, 2022 at 10:55 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -285,7 +285,7 @@ CREATE TABLE `data` (
 --
 
 INSERT INTO `data` (`id`, `register_member`, `jobs_found`, `best_companies`, `created_at`, `updated_at`) VALUES
-(1, 7777777, 768986, 1234, '2022-04-13', '2022-04-13');
+(1, 4000000, 768986, 1234, '2022-04-13', '2022-04-13');
 
 -- --------------------------------------------------------
 
@@ -352,6 +352,7 @@ CREATE TABLE `job` (
   `location` varchar(255) NOT NULL,
   `languages` varchar(255) NOT NULL,
   `skills` varchar(255) NOT NULL,
+  `file` varchar(255) NOT NULL,
   `views` int(10) NOT NULL DEFAULT 0,
   `id_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `id_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
@@ -365,12 +366,14 @@ CREATE TABLE `job` (
 -- Dumping data for table `job`
 --
 
-INSERT INTO `job` (`id`, `name`, `description`, `type`, `category`, `availability`, `hourly`, `experience_level`, `salary_min`, `salary_max`, `location`, `languages`, `skills`, `views`, `id_candidate`, `id_company`, `status`, `created_at`, `updated_at`, `expired_at`) VALUES
-(0, '', '', '', '', '', 0, '', 0, 0, '', '', '', 0, 0, 0, '\'\"\"\'', '0000-00-00', '0000-00-00', '0000-00-00'),
-(3, 'UX Designer', 'A UX Designer, or User Experience Designer, is responsible for monitoring user experience and ensuring that websites, software programs and products are easy to use. Their duties include reviewing user feedback to determine potential defects or areas for clarity, working closely with other IT professionals and company personnel to refine user experience and performing usability tests on software products or website features to ensure functionality.', 'Developer', 'Web & Mobile Software Dev', '', 0, 'Full Time', 599, 5000, 'New York City', 'English', 'UI, UX, Photoshop, Designer, HTML, CSS, Jquery', 0, 2, 0, '', '2022-04-14', '2022-04-14', '2022-05-14'),
-(4, 'PHP Developer', 'PHP developers write server-side web applications using Hypertext Preprocessor (PHP) scripting languages. They are tasked with developing and coding back-end components and connecting applications to other web services. PHP developers also assist front-end developers to ensure their work integrates into the application.', '', 'Web & Mobile Software Dev', 'Full Time', 1, 'Intermediate (3 year - 5 year)', 44, 5000, 'India', 'India', 'Php, Sql, Javascript, HTML, css, jquery', 0, 3, 0, '\'\"\"\'', '2022-04-14', '2022-04-14', '2022-05-14'),
-(5, 'Wordpress Developer', 'WordPress developers design and implement websites for companies using the WordPress creation tool. They are responsible for both front-end and back-end development, including the implementation of themes and plugins. Their goal is to create attractive and user-friendly websites according to client specifications.', 'Wordpress Developer', 'Web & Mobile Software Dev', 'Part Time', 0, 'Mid-level (5 year - 7 year)', 900, 5000, 'Australia', 'Australia', 'Html, css, javascript, jquery, wordpress', 0, 0, 2, '\'\"\"\'', '2022-04-14', '2022-04-14', '2022-05-14'),
-(6, 'UX Designer', 'Conducting user research and testing\r\nDeveloping wireframes and task flows based on user needs\r\nCollaborating with Designers and Developers to create intuitive, user-friendly software', 'Developer', 'Design & Creative', 'Full Time', 1, 'Mid level(5 year - 7year)', 80, 5000, 'New York City', 'English', 'UX, UI, Photoshop', 0, 2, 0, '', '2022-04-14', '2022-04-14', '2022-05-14');
+INSERT INTO `job` (`id`, `name`, `description`, `type`, `category`, `availability`, `hourly`, `experience_level`, `salary_min`, `salary_max`, `location`, `languages`, `skills`, `file`, `views`, `id_candidate`, `id_company`, `status`, `created_at`, `updated_at`, `expired_at`) VALUES
+(0, '', '', '', '', '', 0, '', 0, 0, '', '', '', '', 0, 0, 0, '\'\"\"\'', '0000-00-00', '0000-00-00', '0000-00-00'),
+(3, 'UX Designer', 'A UX Designer, or User Experience Designer, is responsible for monitoring user experience and ensuring that websites, software programs and products are easy to use. Their duties include reviewing user feedback to determine potential defects or areas for clarity, working closely with other IT professionals and company personnel to refine user experience and performing usability tests on software products or website features to ensure functionality.', 'UX Designer', 'Design & Creative', 'Full Time', 0, 'Intermediate (3 year - 5 year)', 444, 5000, 'California', 'English', 'UI, UX, Photoshop, Designer, HTML, CSS, Jquery', 'requirements.pdf', 0, 2, 0, 'Expiring', '2022-04-14', '2022-04-15', '2022-04-13'),
+(4, 'PHP Developer', 'PHP developers write server-side web applications using Hypertext Preprocessor (PHP) scripting languages. They are tasked with developing and coding back-end components and connecting applications to other web services. PHP developers also assist front-end developers to ensure their work integrates into the application.', '', 'Web & Mobile Software Dev', 'Full Time', 1, 'Intermediate (3 year - 5 year)', 44, 5000, 'India', 'India', 'Php, Sql, Javascript, HTML, css, jquery', '', 0, 3, 0, '\'\"\"\'', '2022-04-14', '2022-04-14', '2022-05-14'),
+(5, 'Wordpress Developer', 'WordPress developers design and implement websites for companies using the WordPress creation tool. They are responsible for both front-end and back-end development, including the implementation of themes and plugins. Their goal is to create attractive and user-friendly websites according to client specifications.', 'Wordpress Developer', 'Web & Mobile Software Dev', 'Part Time', 0, 'Mid-level (5 year - 7 year)', 900, 5000, 'Australia', 'Australia', 'Html, css, javascript, jquery, wordpress', '', 0, 0, 2, '\'\"\"\'', '2022-04-14', '2022-04-14', '2022-05-14'),
+(6, 'UX Designer', 'Conducting user research and testing\r\nDeveloping wireframes and task flows based on user needs\r\nCollaborating with Designers and Developers to create intuitive, user-friendly software', 'Developer', 'Design & Creative', 'Full Time', 1, 'Mid level(5 year - 7year)', 80, 5000, 'New York City', 'English', 'UX, UI, Photoshop', '', 0, 2, 0, '', '2022-04-14', '2022-04-14', '2022-05-14'),
+(7, 'Front End Developer', 'Determining the structure and design of web pages.\nEnsuring user experience determines design choices.\nDeveloping features to enhance the user experience.\nStriking a balance between functional and aesthetic design.\nEnsuring web design is optimized for smartphones.\nBuilding reusable code for future use.\nOptimizing web pages for maximum speed and scalability.\nUtilizing a variety of markup languages to write web pages.\nMaintaining brand consistency throughout the design.', 'Front End Development', 'Web & Mobile Software Dev', 'Part Time', 0, 'Entry level(1 year - 3year)', 200, 5000, 'Viet Nam', 'English', 'HTML, CSS, Javascript, Jquery, React, Responsive', 'required.docx', 0, 2, 0, '\'\"\"\'', '2022-04-15', '2022-04-15', '2022-05-15'),
+(8, 'Nodejs Developer', 'Determining the structure and design of web pages.\nEnsuring user experience determines design choices.\nDeveloping features to enhance the user experience.\nStriking a balance between functional and aesthetic design.\nEnsuring web design is optimized for smartphones.\nBuilding reusable code for future use.\nOptimizing web pages for maximum speed and scalability.\nUtilizing a variety of markup languages to write web pages.\nMaintaining brand consistency throughout the design.', 'Backend Development', 'Web & Mobile Software Dev', 'Full Time', 1, 'Intern (<1year)', 33, 5000, 'Japan', 'Japan', 'HTML, CSS, Javascript, Sql, Nodejs, Express', 'required.pdf', 0, 0, 2, '\'\"\"\'', '2022-04-15', '2022-04-15', '2022-05-15');
 
 -- --------------------------------------------------------
 
@@ -728,7 +731,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `location`
