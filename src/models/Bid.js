@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const alias = 'Bid';
-    
+
     const cols = {
-        min_rate:{
+        min_rate: {
             type: DataTypes.INTEGER,
         },
         delivery_time: {
@@ -12,9 +12,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
         },
         id_candidate: {
-            type: DataTypes.INTEGER,
-        },
-        id_company: {
             type: DataTypes.INTEGER,
         },
         status: {

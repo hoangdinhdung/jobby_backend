@@ -1,9 +1,12 @@
 
-module.exports = (sequelize, DataTypes) =>{
+module.exports = (sequelize, DataTypes) => {
     const alias = 'Candidate';
 
     const cols = {
-        image:{
+        type: {
+            type: DataTypes.STRING,
+        },
+        image: {
             type: DataTypes.STRING,
         },
         first_name: {
@@ -15,7 +18,7 @@ module.exports = (sequelize, DataTypes) =>{
         email: {
             type: DataTypes.STRING,
         },
-        password:{
+        password: {
             type: DataTypes.STRING,
         },
         description: {
@@ -27,30 +30,30 @@ module.exports = (sequelize, DataTypes) =>{
         skills: {
             type: DataTypes.STRING,
         },
-        availability:{
+        availability: {
             type: DataTypes.STRING,
         },
-        experience_level:{
+        experience_level: {
             type: DataTypes.STRING,
         },
-        pay_rate:{
+        pay_rate: {
             type: DataTypes.INTEGER,
         },
-        languages:{
+        languages: {
             type: DataTypes.STRING,
         },
-        id_location:{
+        id_location: {
             type: DataTypes.STRING,
         },
-        rating:{
-            type: DataTypes.DOUBLE(1,2),
+        rating: {
+            type: DataTypes.DOUBLE(1, 2),
         },
-        status:{
+        status: {
             type: DataTypes.STRING,
         }
     };
 
-    const config = { tableName: 'candidate'};
+    const config = { tableName: 'candidate' };
 
     const Candidate = sequelize.define(alias, cols, config);
     // start config foreign key
@@ -74,7 +77,12 @@ module.exports = (sequelize, DataTypes) =>{
         Candidate.hasMany(models.Bookmark, {
             as: 'bookmark_by',
             foreignKey: 'id_candidate',
-        })
+        });
+
+        Candidate.hasMany(models.Statement, {
+            as: 'statement',
+            foreignKey: 'id_candidate',
+        });
     }
 
     // end config foreign key

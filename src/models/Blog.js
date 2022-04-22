@@ -2,13 +2,10 @@ module.exports = (sequelize, DataTypes) => {
     const alias = 'Blog';
 
     const cols = {
-        image:{
+        image: {
             type: DataTypes.STRING,
         },
         id_candidate: {
-            type: DataTypes.INTEGER,
-        },
-        id_company: {
             type: DataTypes.INTEGER,
         },
         title: {
@@ -28,10 +25,10 @@ module.exports = (sequelize, DataTypes) => {
     const config = { tableName: 'blog' };
 
     const Blog = sequelize.define(alias, cols, config);
-    
+
     // start config foreign key
 
     // end config foreign key
-    
+
     return Blog;
 }

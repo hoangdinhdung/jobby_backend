@@ -3,13 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     const alias = 'Apply';
 
     const cols = {
-        id_job:{
+        id_job: {
             type: DataTypes.INTEGER
         },
-        id_candidate:{
-            type: DataTypes.INTEGER
-        },
-        id_company: {
+        id_candidate: {
             type: DataTypes.INTEGER
         },
         full_name: {

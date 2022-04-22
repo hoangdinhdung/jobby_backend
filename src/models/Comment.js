@@ -3,13 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     const alias = 'Comment';
 
     const cols = {
-        id_candidate:{
+        id_candidate: {
             type: DataTypes.INTEGER,
         },
-        id_company: {
-            type: DataTypes.INTEGER,
-        },
-        id_blog:{
+        id_blog: {
             type: DataTypes.INTEGER,
         },
         content: {

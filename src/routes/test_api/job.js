@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+//----------* MIDDLEWARES *----------//
+const JWT = require('../../middlewares/JWT');
+
 // CONTROLLER
 const jobController = require('../../controllers/test_api/JobController');
 

@@ -2,13 +2,10 @@ module.exports = (sequelize, DataTypes) => {
     const alias = 'Bookmark';
 
     const cols = {
-        id_job:{
+        id_job: {
             type: DataTypes.INTEGER,
         },
-        id_project:{
-            type: DataTypes.INTEGER,
-        },
-        id_company:{
+        id_project: {
             type: DataTypes.INTEGER,
         },
         id_candidate: {
@@ -17,15 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         by_candidate: {
             type: DataTypes.INTEGER,
         },
-        by_company: {
-            type: DataTypes.INTEGER,
-        }
     };
 
     const config = { tableName: 'bookmark' };
 
     const Bookmark = sequelize.define(alias, cols, config);
-    
+
     // start config foreign key
     Bookmark.associate = (models) => {
         Bookmark.belongsTo(models.Job, {
@@ -38,10 +32,6 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'id_project',
         });
 
-        Bookmark.belongsTo(models.Company, {
-            as: 'company',
-            foreignKey: 'id_company',
-        });
 
         Bookmark.belongsTo(models.Candidate, {
             as: 'candidate',
@@ -52,11 +42,6 @@ module.exports = (sequelize, DataTypes) => {
             as: 'candidate_by',
             foreignKey: 'by_candidate',
         });
-
-        Bookmark.belongsTo(models.Company, {
-            as: 'company_by',
-            foreignKey: 'by_company',
-        })
     }
     // end config foreign key
 

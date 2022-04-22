@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         availability: {
             type: DataTypes.STRING,
-        }, 
-        hourly:{
+        },
+        hourly: {
             type: DataTypes.INTEGER,
         },
         experience_level: {
@@ -31,14 +31,14 @@ module.exports = (sequelize, DataTypes) => {
         },
         location: {
             type: DataTypes.STRING,
-        },  
+        },
         languages: {
-            type: DataTypes.STRING, 
+            type: DataTypes.STRING,
         },
         skills: {
             type: DataTypes.STRING,
         },
-        file:{
+        file: {
             type: DataTypes.STRING,
         },
         views: {
@@ -46,9 +46,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         id_candidate: {
             type: DataTypes.INTEGER,
-        },
-        id_company: {
-            type: DataTypes.INTEGER,    
         },
         status: {
             type: DataTypes.STRING,
@@ -75,16 +72,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'id_candidate',
         });
 
-        Job.belongsTo(models.Company, {
-            as: 'company',
-            foreignKey: 'id_company',
-        });
-
         Job.hasMany(models.Bookmark, {
             as: 'bookmark',
             foreignKey: 'id_job',
         })
-    } 
+    }
     // end config foreign key
     return Job;
 }

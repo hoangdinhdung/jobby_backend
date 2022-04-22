@@ -6,10 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         id_candidate: {
             type: DataTypes.INTEGER,
         },
-        id_company: {
-            type: DataTypes.INTEGER,
-        },
-        type:{
+        type: {
             type: DataTypes.STRING,
         },
         url: {

@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const candidateController = {
     // Lấy danh sách ứng viên dựa vào page params
     candidateWithPageLimit: async (req, res) => {
-        try{
+        try {
             //console.log(req.query.page);
             const candidateList = await models.Candidate.findAll({
                 limit: 6,
@@ -17,19 +17,20 @@ const candidateController = {
             res.json({
                 candidateList: candidateList
             })
-        }catch(err){
+        } catch (err) {
             console.log(`ERROR: ${err}`);
         }
-    }, 
+    },
 
     //Tạo mới ứng viên (đăng ký)
     createCandiate: async (req, res) => {
-        try{
+        try {
             //console.log(req.body.email);
-            
+
             const passwordHashed = bcrypt.hashSync(req.body.password, 5);
             //console.log(passwordHashed);
             await models.Candidate.create({
+                type: 'candidate',
                 image: "unavailable.png",
                 first_name: "",
                 last_name: "",
@@ -50,31 +51,33 @@ const candidateController = {
             });
 
             res.redirect('/candidate');
-        }catch(err){
+        } catch (err) {
             console.log(`ERROR: ${err}`);
         }
-        
+
     },
+
 
     // Danh sách tất cả ứng viên
     candidateFullList: async (req, res) => {
-        try{
+        try {
             const allCandidate = await models.Candidate.findAll({
                 logging: false,
-                include: ['apply']
+                //include: ['apply'],
+                offset: 1,
             });
 
             res.json({
                 allCandidate: allCandidate
             })
-        }catch(err){
+        } catch (err) {
             console.log(`ERROR: ${err}`);
         }
     },
 
     // Hiển thị ứng cử viên nổi bật
     featuredCandidates: async (req, res) => {
-        try{
+        try {
             featuredCandidates = await models.Candidate.findAll({
                 order: [
                     ['rating', 'desc']
@@ -87,7 +90,7 @@ const candidateController = {
             res.json({
                 featuredCandidates: featuredCandidates
             })
-        }catch(err){
+        } catch (err) {
             console.log(`ERROR: ${err}`);
         }
     }

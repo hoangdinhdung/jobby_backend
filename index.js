@@ -1,14 +1,20 @@
 const express = require("express");
 const path = require("path");
-//create express app
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+const JWT = require('./src/middlewares/JWT');
+const { Op } = require('sequelize');
+//----------* CREATE EXPRESS APP *----------//
 const app = express();
 
 
 
-//set up the port server
+//SET UP THE PORT SERVER
 const port = process.env.PORT || 3000;
 
-// define use
+// USE MIDDLEWARES
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(
@@ -16,13 +22,19 @@ app.use(
     extended: true,
   })
 );
+app.use(cookieParser());
+app.use(session({
+  secret: 'jobby',
+  resave: true,
+  saveUninitialized: true
+}));
 
 //----------* VIEW ENGINE SETUP *----------//
 app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
 
 
-//import test api routes
+//----------* TEST API ROUTES *----------//
 const adminRoute = require('./src/routes/test_api/admin');
 const stateRoute = require('./src/routes/test_api/state');
 const jobRoute = require('./src/routes//test_api/job');
@@ -31,23 +43,23 @@ const candidateRoute = require('./src/routes/test_api/candidate');
 const projectRoute = require('./src/routes/test_api/project');
 const bookmarkRoute = require('./src/routes/test_api/bookmark');
 
-//create test api Routes
+//----------* USE API ROUTES *----------//
 app.use('/api/v1/admin', adminRoute);
-app.use('/api/v1/state', stateRoute);
-app.use('/api/v1/job', jobRoute);
-app.use('/api/v1/category', categoryRoute);
-app.use('/api/v1/candidate', candidateRoute);
-app.use('/api/v1/project', projectRoute);
-app.use('/api/v1/bookmark', bookmarkRoute);
+app.use('/api/v1/state', JWT.authenToken, stateRoute);
+app.use('/api/v1/job', JWT.authenToken, jobRoute);
+app.use('/api/v1/category', JWT.authenToken, categoryRoute);
+app.use('/api/v1/candidate', JWT.authenToken, candidateRoute);
+app.use('/api/v1/project', JWT.authenToken, projectRoute);
+app.use('/api/v1/bookmark', JWT.authenToken, bookmarkRoute);
 
 
-// import routes (Main)
+//----------* IMPORT MAIN ROUTES *----------//
 const homeRoute = require('./src/routes/home');
 
-// use routes (Main)
+//----------* USE MAIN ROUTES *----------//
 app.use('/', homeRoute);
 
-// Listen server
+//----------* LISTEN SERVER *----------//
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2022 at 10:55 AM
+-- Generation Time: Apr 22, 2022 at 07:09 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -31,7 +31,6 @@ CREATE TABLE `apply` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_job` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `id_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `id_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL,
   `full_name` varchar(255) NOT NULL,
@@ -43,8 +42,8 @@ CREATE TABLE `apply` (
 -- Dumping data for table `apply`
 --
 
-INSERT INTO `apply` (`id`, `id_job`, `id_candidate`, `id_company`, `created_at`, `updated_at`, `full_name`, `email`, `cv_image`) VALUES
-(0, 0, 0, 0, '2022-04-08', '2022-04-08', 'Anonymous', 'Anonymous', 'Anonymous');
+INSERT INTO `apply` (`id`, `id_job`, `id_candidate`, `created_at`, `updated_at`, `full_name`, `email`, `cv_image`) VALUES
+(0, 0, 0, '2022-04-08', '2022-04-08', 'Anonymous', 'Anonymous', 'Anonymous');
 
 -- --------------------------------------------------------
 
@@ -58,7 +57,6 @@ CREATE TABLE `bid` (
   `delivery_time` date DEFAULT NULL,
   `id_project` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `id_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `id_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `status` varchar(255) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
@@ -68,8 +66,8 @@ CREATE TABLE `bid` (
 -- Dumping data for table `bid`
 --
 
-INSERT INTO `bid` (`id`, `min_rate`, `delivery_time`, `id_project`, `id_candidate`, `id_company`, `status`, `created_at`, `updated_at`) VALUES
-(0, 0, '2022-04-08', 0, 0, 0, '', '2022-04-08', '2022-04-08');
+INSERT INTO `bid` (`id`, `min_rate`, `delivery_time`, `id_project`, `id_candidate`, `status`, `created_at`, `updated_at`) VALUES
+(0, 0, '2022-04-08', 0, 0, '', '2022-04-08', '2022-04-08');
 
 -- --------------------------------------------------------
 
@@ -81,7 +79,6 @@ CREATE TABLE `blog` (
   `id` int(10) UNSIGNED NOT NULL,
   `image` varchar(255) NOT NULL,
   `id_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `id_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `title` varchar(255) NOT NULL,
   `description1` text NOT NULL,
   `message` varchar(255) NOT NULL,
@@ -94,8 +91,8 @@ CREATE TABLE `blog` (
 -- Dumping data for table `blog`
 --
 
-INSERT INTO `blog` (`id`, `image`, `id_candidate`, `id_company`, `title`, `description1`, `message`, `description2`, `created_at`, `updated_at`) VALUES
-(0, '', 0, 0, '', '', '', '', '2022-04-08', '2022-04-08');
+INSERT INTO `blog` (`id`, `image`, `id_candidate`, `title`, `description1`, `message`, `description2`, `created_at`, `updated_at`) VALUES
+(0, '', 0, '', '', '', '', '2022-04-08', '2022-04-08');
 
 -- --------------------------------------------------------
 
@@ -107,10 +104,8 @@ CREATE TABLE `bookmark` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_job` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `id_project` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `id_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `id_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `by_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `by_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -119,9 +114,9 @@ CREATE TABLE `bookmark` (
 -- Dumping data for table `bookmark`
 --
 
-INSERT INTO `bookmark` (`id`, `id_job`, `id_project`, `id_company`, `id_candidate`, `by_candidate`, `by_company`, `created_at`, `updated_at`) VALUES
-(0, 0, 0, 0, 0, 0, 0, '2022-04-08', '2022-04-08'),
-(2, 4, 0, 0, 0, 2, 0, '2022-04-14', '2022-04-14');
+INSERT INTO `bookmark` (`id`, `id_job`, `id_project`, `id_candidate`, `by_candidate`, `created_at`, `updated_at`) VALUES
+(0, 0, 0, 0, 0, '2022-04-08', '2022-04-08'),
+(2, 4, 0, 0, 2, '2022-04-14', '2022-04-14');
 
 -- --------------------------------------------------------
 
@@ -131,6 +126,7 @@ INSERT INTO `bookmark` (`id`, `id_job`, `id_project`, `id_company`, `id_candidat
 
 CREATE TABLE `candidate` (
   `id` int(10) UNSIGNED NOT NULL,
+  `type` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
@@ -154,10 +150,10 @@ CREATE TABLE `candidate` (
 -- Dumping data for table `candidate`
 --
 
-INSERT INTO `candidate` (`id`, `image`, `first_name`, `last_name`, `email`, `password`, `description`, `tagline`, `skills`, `availability`, `experience_level`, `pay_rate`, `languages`, `id_location`, `rating`, `status`, `created_at`, `updated_at`) VALUES
-(0, NULL, NULL, NULL, 'anonymous', 'anonymous', NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, 'deactived', '2022-04-08', '2022-04-08'),
-(2, 'johndoe.jpg', 'John', 'Doe', 'johndoe@gmail.com', '$2a$05$s6NgvPG3tAq8wTKpkuR85evrbdc4SNKHdhAUv17uGlU2uSIW30.GK', 'My name is John Doe, I am a UX Designer', 'UX Designer', 'UX, UI, Photoshop,  Designer, HTML, CSS, Javascript', 'Full Time', 'Entry-level (1 year - 3 year)', 50, 'English', 0, 0.0, 'active', '2022-04-13', '2022-04-13'),
-(3, 'johnsonsmith.png', 'Johnson', 'Smith', 'johnsonsmith@gmail.com', '$2a$05$kORz50mOIdLqexsP3Ato3uaDmPkijjTsWZ6U.lOaqhpIyzWznd5T.', 'Hi, My name\'s Johnson Smith', 'PHP Developer', 'Php, Mysql, Javascript, HTML, CSS, Lavarel', 'Part Time', 'Mid-level (5 year - 7 year)', 90, 'India', 0, 0.0, 'active', '2022-04-13', '2022-04-13');
+INSERT INTO `candidate` (`id`, `type`, `image`, `first_name`, `last_name`, `email`, `password`, `description`, `tagline`, `skills`, `availability`, `experience_level`, `pay_rate`, `languages`, `id_location`, `rating`, `status`, `created_at`, `updated_at`) VALUES
+(0, '', NULL, NULL, NULL, 'anonymous', 'anonymous', NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, 'deactived', '2022-04-08', '2022-04-08'),
+(2, 'candidate', 'johndoe.jpg', 'John', 'Doe', 'johndoe@gmail.com', '$2a$05$s6NgvPG3tAq8wTKpkuR85evrbdc4SNKHdhAUv17uGlU2uSIW30.GK', 'My name is John Doe, I am a UX Designer', 'UX Designer', 'UX, UI, Photoshop,  Designer, HTML, CSS, Javascript', 'Full Time', 'Entry-level (1 year - 3 year)', 50, 'English', 0, 0.0, 'active', '2022-04-13', '2022-04-13'),
+(3, 'candidate', 'johnsonsmith.png', 'Johnson', 'Smith', 'johnsonsmith@gmail.com', '$2a$05$kORz50mOIdLqexsP3Ato3uaDmPkijjTsWZ6U.lOaqhpIyzWznd5T.', 'Hi, My name\'s Johnson Smith', 'PHP Developer', 'Php, Mysql, Javascript, HTML, CSS, Lavarel', 'Part Time', 'Mid-level (5 year - 7 year)', 90, 'India', 0, 0.0, 'active', '2022-04-13', '2022-04-13');
 
 -- --------------------------------------------------------
 
@@ -201,46 +197,11 @@ INSERT INTO `category` (`id`, `name`, `jobs`, `image`, `created_at`, `updated_at
 CREATE TABLE `comment` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `id_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `id_blog` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `content` text NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `company`
---
-
-CREATE TABLE `company` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `tagline` varchar(255) DEFAULT NULL,
-  `skills` varchar(255) DEFAULT NULL,
-  `availability` varchar(255) DEFAULT NULL,
-  `experience_level` varchar(255) DEFAULT NULL,
-  `pay_rate` int(11) DEFAULT NULL,
-  `languages` varchar(255) DEFAULT NULL,
-  `id_location` int(10) UNSIGNED DEFAULT NULL,
-  `rating` double(2,1) NOT NULL DEFAULT 0.0,
-  `status` varchar(255) NOT NULL,
-  `created_at` date NOT NULL,
-  `updated_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `company`
---
-
-INSERT INTO `company` (`id`, `image`, `name`, `email`, `password`, `description`, `tagline`, `skills`, `availability`, `experience_level`, `pay_rate`, `languages`, `id_location`, `rating`, `status`, `created_at`, `updated_at`) VALUES
-(0, NULL, NULL, 'anonymous', 'anonymous', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.0, 'deactived', '2022-04-08', '2022-04-08'),
-(2, 'envato.jpg', 'Envato', 'envato@gmail.com', 'envato', 'Company\'s Name: Envato', 'Wordpress Developer', 'HTML, CSS, Wordpress, Javascript, Jquery', 'Full Time', 'Senior or executive-level (> 7 year)', 120, 'Australia', NULL, 0.0, 'active', '2022-04-14', '2022-04-14');
 
 -- --------------------------------------------------------
 
@@ -251,7 +212,6 @@ INSERT INTO `company` (`id`, `image`, `name`, `email`, `password`, `description`
 CREATE TABLE `contact` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `id_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `type` varchar(2) NOT NULL,
   `url` varchar(255) NOT NULL,
   `created_at` date NOT NULL,
@@ -262,8 +222,8 @@ CREATE TABLE `contact` (
 -- Dumping data for table `contact`
 --
 
-INSERT INTO `contact` (`id`, `id_candidate`, `id_company`, `type`, `url`, `created_at`, `updated_at`) VALUES
-(0, 0, 0, '0', '0', '2022-04-08', '2022-04-08');
+INSERT INTO `contact` (`id`, `id_candidate`, `type`, `url`, `created_at`, `updated_at`) VALUES
+(0, 0, '0', '0', '2022-04-08', '2022-04-08');
 
 -- --------------------------------------------------------
 
@@ -355,7 +315,6 @@ CREATE TABLE `job` (
   `file` varchar(255) NOT NULL,
   `views` int(10) NOT NULL DEFAULT 0,
   `id_candidate` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `id_company` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `status` varchar(255) NOT NULL DEFAULT '''""''',
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL,
@@ -366,14 +325,14 @@ CREATE TABLE `job` (
 -- Dumping data for table `job`
 --
 
-INSERT INTO `job` (`id`, `name`, `description`, `type`, `category`, `availability`, `hourly`, `experience_level`, `salary_min`, `salary_max`, `location`, `languages`, `skills`, `file`, `views`, `id_candidate`, `id_company`, `status`, `created_at`, `updated_at`, `expired_at`) VALUES
-(0, '', '', '', '', '', 0, '', 0, 0, '', '', '', '', 0, 0, 0, '\'\"\"\'', '0000-00-00', '0000-00-00', '0000-00-00'),
-(3, 'UX Designer', 'A UX Designer, or User Experience Designer, is responsible for monitoring user experience and ensuring that websites, software programs and products are easy to use. Their duties include reviewing user feedback to determine potential defects or areas for clarity, working closely with other IT professionals and company personnel to refine user experience and performing usability tests on software products or website features to ensure functionality.', 'UX Designer', 'Design & Creative', 'Full Time', 0, 'Intermediate (3 year - 5 year)', 444, 5000, 'California', 'English', 'UI, UX, Photoshop, Designer, HTML, CSS, Jquery', 'requirements.pdf', 0, 2, 0, 'Expiring', '2022-04-14', '2022-04-15', '2022-04-13'),
-(4, 'PHP Developer', 'PHP developers write server-side web applications using Hypertext Preprocessor (PHP) scripting languages. They are tasked with developing and coding back-end components and connecting applications to other web services. PHP developers also assist front-end developers to ensure their work integrates into the application.', '', 'Web & Mobile Software Dev', 'Full Time', 1, 'Intermediate (3 year - 5 year)', 44, 5000, 'India', 'India', 'Php, Sql, Javascript, HTML, css, jquery', '', 0, 3, 0, '\'\"\"\'', '2022-04-14', '2022-04-14', '2022-05-14'),
-(5, 'Wordpress Developer', 'WordPress developers design and implement websites for companies using the WordPress creation tool. They are responsible for both front-end and back-end development, including the implementation of themes and plugins. Their goal is to create attractive and user-friendly websites according to client specifications.', 'Wordpress Developer', 'Web & Mobile Software Dev', 'Part Time', 0, 'Mid-level (5 year - 7 year)', 900, 5000, 'Australia', 'Australia', 'Html, css, javascript, jquery, wordpress', '', 0, 0, 2, '\'\"\"\'', '2022-04-14', '2022-04-14', '2022-05-14'),
-(6, 'UX Designer', 'Conducting user research and testing\r\nDeveloping wireframes and task flows based on user needs\r\nCollaborating with Designers and Developers to create intuitive, user-friendly software', 'Developer', 'Design & Creative', 'Full Time', 1, 'Mid level(5 year - 7year)', 80, 5000, 'New York City', 'English', 'UX, UI, Photoshop', '', 0, 2, 0, '', '2022-04-14', '2022-04-14', '2022-05-14'),
-(7, 'Front End Developer', 'Determining the structure and design of web pages.\nEnsuring user experience determines design choices.\nDeveloping features to enhance the user experience.\nStriking a balance between functional and aesthetic design.\nEnsuring web design is optimized for smartphones.\nBuilding reusable code for future use.\nOptimizing web pages for maximum speed and scalability.\nUtilizing a variety of markup languages to write web pages.\nMaintaining brand consistency throughout the design.', 'Front End Development', 'Web & Mobile Software Dev', 'Part Time', 0, 'Entry level(1 year - 3year)', 200, 5000, 'Viet Nam', 'English', 'HTML, CSS, Javascript, Jquery, React, Responsive', 'required.docx', 0, 2, 0, '\'\"\"\'', '2022-04-15', '2022-04-15', '2022-05-15'),
-(8, 'Nodejs Developer', 'Determining the structure and design of web pages.\nEnsuring user experience determines design choices.\nDeveloping features to enhance the user experience.\nStriking a balance between functional and aesthetic design.\nEnsuring web design is optimized for smartphones.\nBuilding reusable code for future use.\nOptimizing web pages for maximum speed and scalability.\nUtilizing a variety of markup languages to write web pages.\nMaintaining brand consistency throughout the design.', 'Backend Development', 'Web & Mobile Software Dev', 'Full Time', 1, 'Intern (<1year)', 33, 5000, 'Japan', 'Japan', 'HTML, CSS, Javascript, Sql, Nodejs, Express', 'required.pdf', 0, 0, 2, '\'\"\"\'', '2022-04-15', '2022-04-15', '2022-05-15');
+INSERT INTO `job` (`id`, `name`, `description`, `type`, `category`, `availability`, `hourly`, `experience_level`, `salary_min`, `salary_max`, `location`, `languages`, `skills`, `file`, `views`, `id_candidate`, `status`, `created_at`, `updated_at`, `expired_at`) VALUES
+(0, '', '', '', '', '', 0, '', 0, 0, '', '', '', '', 0, 0, '\'\"\"\'', '0000-00-00', '0000-00-00', '0000-00-00'),
+(3, 'UX Designer', 'A UX Designer, or User Experience Designer, is responsible for monitoring user experience and ensuring that websites, software programs and products are easy to use. Their duties include reviewing user feedback to determine potential defects or areas for clarity, working closely with other IT professionals and company personnel to refine user experience and performing usability tests on software products or website features to ensure functionality.', 'UX Designer', 'Design & Creative', 'Full Time', 0, 'Intermediate (3 year - 5 year)', 444, 5000, 'California', 'English', 'UI, UX, Photoshop, Designer, HTML, CSS, Jquery', 'requirements.pdf', 0, 2, 'Expiring', '2022-04-14', '2022-04-21', '2022-04-13'),
+(4, 'PHP Developer', 'PHP developers write server-side web applications using Hypertext Preprocessor (PHP) scripting languages. They are tasked with developing and coding back-end components and connecting applications to other web services. PHP developers also assist front-end developers to ensure their work integrates into the application.', '', 'Web & Mobile Software Dev', 'Full Time', 1, 'Intermediate (3 year - 5 year)', 44, 5000, 'India', 'India', 'Php, Sql, Javascript, HTML, css, jquery', '', 0, 3, '\'\"\"\'', '2022-04-14', '2022-04-14', '2022-05-14'),
+(5, 'Wordpress Developer', 'WordPress developers design and implement websites for companies using the WordPress creation tool. They are responsible for both front-end and back-end development, including the implementation of themes and plugins. Their goal is to create attractive and user-friendly websites according to client specifications.', 'Wordpress Developer', 'Web & Mobile Software Dev', 'Part Time', 0, 'Mid-level (5 year - 7 year)', 900, 5000, 'Australia', 'Australia', 'Html, css, javascript, jquery, wordpress', '', 0, 0, '\'\"\"\'', '2022-04-14', '2022-04-14', '2022-05-14'),
+(6, 'UX Designer', 'Conducting user research and testing\r\nDeveloping wireframes and task flows based on user needs\r\nCollaborating with Designers and Developers to create intuitive, user-friendly software', 'Developer', 'Design & Creative', 'Full Time', 1, 'Mid level(5 year - 7year)', 80, 5000, 'New York City', 'English', 'UX, UI, Photoshop', '', 0, 2, '', '2022-04-14', '2022-04-14', '2022-05-14'),
+(7, 'Front End Developer', 'Determining the structure and design of web pages.\nEnsuring user experience determines design choices.\nDeveloping features to enhance the user experience.\nStriking a balance between functional and aesthetic design.\nEnsuring web design is optimized for smartphones.\nBuilding reusable code for future use.\nOptimizing web pages for maximum speed and scalability.\nUtilizing a variety of markup languages to write web pages.\nMaintaining brand consistency throughout the design.', 'Front End Development', 'Web & Mobile Software Dev', 'Part Time', 0, 'Entry level(1 year - 3year)', 200, 5000, 'Viet Nam', 'English', 'HTML, CSS, Javascript, Jquery, React, Responsive', 'required.docx', 0, 2, '\'\"\"\'', '2022-04-15', '2022-04-15', '2022-05-15'),
+(8, 'Nodejs Developer', 'Determining the structure and design of web pages.\nEnsuring user experience determines design choices.\nDeveloping features to enhance the user experience.\nStriking a balance between functional and aesthetic design.\nEnsuring web design is optimized for smartphones.\nBuilding reusable code for future use.\nOptimizing web pages for maximum speed and scalability.\nUtilizing a variety of markup languages to write web pages.\nMaintaining brand consistency throughout the design.', 'Backend Development', 'Web & Mobile Software Dev', 'Full Time', 1, 'Intern (<1year)', 33, 5000, 'Japan', 'Japan', 'HTML, CSS, Javascript, Sql, Nodejs, Express', 'required.pdf', 0, 0, '\'\"\"\'', '2022-04-15', '2022-04-15', '2022-05-15');
 
 -- --------------------------------------------------------
 
@@ -451,7 +410,6 @@ CREATE TABLE `project` (
   `skills` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `id_candidate` int(10) UNSIGNED NOT NULL,
-  `id_company` int(10) UNSIGNED NOT NULL,
   `status` varchar(255) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL,
@@ -462,8 +420,8 @@ CREATE TABLE `project` (
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`id`, `name`, `description`, `category`, `experience_level`, `budget`, `hourly`, `salary_min`, `salary_max`, `location`, `skills`, `image`, `id_candidate`, `id_company`, `status`, `created_at`, `updated_at`, `expired_at`) VALUES
-(0, 'anonymous', 'anonymous', 'anonymous', 'anonymous', 'anonymous', 0, 0, 0, 'anonymous', 'anonymous', 'anonymous', 0, 0, 'anonymous', '2022-04-08', '2022-04-08', '2022-05-08');
+INSERT INTO `project` (`id`, `name`, `description`, `category`, `experience_level`, `budget`, `hourly`, `salary_min`, `salary_max`, `location`, `skills`, `image`, `id_candidate`, `status`, `created_at`, `updated_at`, `expired_at`) VALUES
+(0, 'anonymous', 'anonymous', 'anonymous', 'anonymous', 'anonymous', 0, 0, 0, 'anonymous', 'anonymous', 'anonymous', 0, 'anonymous', '2022-04-08', '2022-04-08', '2022-05-08');
 
 -- --------------------------------------------------------
 
@@ -489,7 +447,7 @@ INSERT INTO `state` (`id`, `image`, `name`, `jobs`, `created_at`, `updated_at`) 
 (2, 'LosAngeles.jpg', 'Los Angeles ', 25, '2022-04-13', '2022-04-13'),
 (3, 'SanFrancisco.jpg', 'SanFrancisco', 12, '2022-04-13', '2022-04-13'),
 (4, 'Tulsa.jpg', 'Tulsa', 190, '2022-04-13', '2022-04-13'),
-(5, 'Austin.jpg', 'Austin', 200, '2022-04-13', '2022-04-13');
+(5, 'Austin.jpg', 'Austin', 201, '2022-04-13', '2022-04-21');
 
 -- --------------------------------------------------------
 
@@ -499,6 +457,7 @@ INSERT INTO `state` (`id`, `image`, `name`, `jobs`, `created_at`, `updated_at`) 
 
 CREATE TABLE `statement` (
   `id` int(1) UNSIGNED NOT NULL,
+  `id_candidate` int(10) UNSIGNED NOT NULL,
   `pricing_name` varchar(255) NOT NULL,
   `invoice_id` int(1) UNSIGNED NOT NULL DEFAULT 0,
   `type` varchar(2) NOT NULL,
@@ -517,7 +476,6 @@ CREATE TABLE `statement` (
 ALTER TABLE `apply`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pk_candidate_apply` (`id_candidate`),
-  ADD KEY `pk_company_apply` (`id_company`),
   ADD KEY `pk_job_apply` (`id_job`);
 
 --
@@ -526,7 +484,6 @@ ALTER TABLE `apply`
 ALTER TABLE `bid`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pk_candidate_bid` (`id_candidate`),
-  ADD KEY `pk_company_bid` (`id_company`),
   ADD KEY `pk_project_bid` (`id_project`);
 
 --
@@ -534,8 +491,7 @@ ALTER TABLE `bid`
 --
 ALTER TABLE `blog`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pk_candidate_blog` (`id_candidate`),
-  ADD KEY `pk_company_blog` (`id_company`);
+  ADD KEY `pk_candidate_blog` (`id_candidate`);
 
 --
 -- Indexes for table `bookmark`
@@ -543,11 +499,9 @@ ALTER TABLE `blog`
 ALTER TABLE `bookmark`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pk_candidate_bookmark` (`id_candidate`),
-  ADD KEY `pk_company_bookmark` (`id_company`),
   ADD KEY `pk_job_bookmark` (`id_job`),
   ADD KEY `pk_project_bookmark` (`id_project`),
-  ADD KEY `pk_candiate_bookmark_by` (`by_candidate`),
-  ADD KEY `pk_company_bookmark_by` (`by_company`);
+  ADD KEY `pk_candiate_bookmark_by` (`by_candidate`);
 
 --
 -- Indexes for table `candidate`
@@ -568,23 +522,14 @@ ALTER TABLE `category`
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pk_candidate_comment` (`id_candidate`),
-  ADD KEY `pk_company_comment` (`id_company`),
   ADD KEY `pk_blog_comment` (`id_blog`);
-
---
--- Indexes for table `company`
---
-ALTER TABLE `company`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `pk_location_company` (`id_location`);
 
 --
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pk_candidate_contact` (`id_candidate`),
-  ADD KEY `pk_company_contact` (`id_company`);
+  ADD KEY `pk_candidate_contact` (`id_candidate`);
 
 --
 -- Indexes for table `data`
@@ -609,8 +554,7 @@ ALTER TABLE `invoice`
 --
 ALTER TABLE `job`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pk_candidate_job` (`id_candidate`),
-  ADD KEY `pk_company_job` (`id_company`);
+  ADD KEY `pk_candidate_job` (`id_candidate`);
 
 --
 -- Indexes for table `location`
@@ -635,8 +579,7 @@ ALTER TABLE `pricing_plan`
 --
 ALTER TABLE `project`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pk_candidate_project` (`id_candidate`),
-  ADD KEY `pk_company_project` (`id_company`);
+  ADD KEY `pk_candidate_project` (`id_candidate`);
 
 --
 -- Indexes for table `state`
@@ -649,7 +592,8 @@ ALTER TABLE `state`
 --
 ALTER TABLE `statement`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pk_invoice_statement` (`invoice_id`);
+  ADD KEY `pk_invoice_statement` (`invoice_id`),
+  ADD KEY `pk_candidate_statement` (`id_candidate`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -696,12 +640,6 @@ ALTER TABLE `category`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `company`
---
-ALTER TABLE `company`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -778,7 +716,6 @@ ALTER TABLE `statement`
 --
 ALTER TABLE `apply`
   ADD CONSTRAINT `pk_candidate_apply` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
-  ADD CONSTRAINT `pk_company_apply` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`),
   ADD CONSTRAINT `pk_job_apply` FOREIGN KEY (`id_job`) REFERENCES `job` (`id`);
 
 --
@@ -786,15 +723,13 @@ ALTER TABLE `apply`
 --
 ALTER TABLE `bid`
   ADD CONSTRAINT `pk_candidate_bid` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
-  ADD CONSTRAINT `pk_company_bid` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`),
   ADD CONSTRAINT `pk_project_bid` FOREIGN KEY (`id_project`) REFERENCES `project` (`id`);
 
 --
 -- Constraints for table `blog`
 --
 ALTER TABLE `blog`
-  ADD CONSTRAINT `pk_candidate_blog` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
-  ADD CONSTRAINT `pk_company_blog` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`);
+  ADD CONSTRAINT `pk_candidate_blog` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`);
 
 --
 -- Constraints for table `bookmark`
@@ -802,8 +737,6 @@ ALTER TABLE `blog`
 ALTER TABLE `bookmark`
   ADD CONSTRAINT `pk_candiate_bookmark_by` FOREIGN KEY (`by_candidate`) REFERENCES `candidate` (`id`),
   ADD CONSTRAINT `pk_candidate_bookmark` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
-  ADD CONSTRAINT `pk_company_bookmark` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`),
-  ADD CONSTRAINT `pk_company_bookmark_by` FOREIGN KEY (`by_company`) REFERENCES `company` (`id`),
   ADD CONSTRAINT `pk_job_bookmark` FOREIGN KEY (`id_job`) REFERENCES `job` (`id`),
   ADD CONSTRAINT `pk_project_bookmark` FOREIGN KEY (`id_project`) REFERENCES `project` (`id`);
 
@@ -818,40 +751,31 @@ ALTER TABLE `candidate`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `pk_blog_comment` FOREIGN KEY (`id_blog`) REFERENCES `blog` (`id`),
-  ADD CONSTRAINT `pk_candidate_comment` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
-  ADD CONSTRAINT `pk_company_comment` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`);
-
---
--- Constraints for table `company`
---
-ALTER TABLE `company`
-  ADD CONSTRAINT `pk_location_company` FOREIGN KEY (`id_location`) REFERENCES `location` (`id`);
+  ADD CONSTRAINT `pk_candidate_comment` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`);
 
 --
 -- Constraints for table `contact`
 --
 ALTER TABLE `contact`
-  ADD CONSTRAINT `pk_candidate_contact` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
-  ADD CONSTRAINT `pk_company_contact` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`);
+  ADD CONSTRAINT `pk_candidate_contact` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`);
 
 --
 -- Constraints for table `job`
 --
 ALTER TABLE `job`
-  ADD CONSTRAINT `pk_candidate_job` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
-  ADD CONSTRAINT `pk_company_job` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`);
+  ADD CONSTRAINT `pk_candidate_job` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`);
 
 --
 -- Constraints for table `project`
 --
 ALTER TABLE `project`
-  ADD CONSTRAINT `pk_candidate_project` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
-  ADD CONSTRAINT `pk_company_project` FOREIGN KEY (`id_company`) REFERENCES `company` (`id`);
+  ADD CONSTRAINT `pk_candidate_project` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`);
 
 --
 -- Constraints for table `statement`
 --
 ALTER TABLE `statement`
+  ADD CONSTRAINT `pk_candidate_statement` FOREIGN KEY (`id_candidate`) REFERENCES `candidate` (`id`),
   ADD CONSTRAINT `pk_invoice_statement` FOREIGN KEY (`invoice_id`) REFERENCES `invoice` (`id`);
 COMMIT;
 

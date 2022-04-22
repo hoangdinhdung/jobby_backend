@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     const alias = 'Project';
 
     const cols = {
-        name:{
+        name: {
             type: DataTypes.STRING,
         },
         description: {
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         budget: {
             type: DataTypes.STRING
         },
-        hourly:{
+        hourly: {
             type: DataTypes.INTEGER,
         },
         salary_min: {
@@ -32,17 +32,14 @@ module.exports = (sequelize, DataTypes) => {
         skills: {
             type: DataTypes.STRING
         },
-        image:{
+        image: {
             type: DataTypes.STRING
-        }, 
+        },
         id_candidate: {
             type: DataTypes.INTEGER
         },
-        id_company: {
-            type: DataTypes.INTEGER
-        },
         status: {
-             type: DataTypes.STRING,
+            type: DataTypes.STRING,
         },
         expired_at: {
             type: DataTypes.DATEONLY,
@@ -55,8 +52,8 @@ module.exports = (sequelize, DataTypes) => {
 
     // start config foreign key
 
-    
-    Project.asscoiate = (models) =>{
+
+    Project.asscoiate = (models) => {
         Project.belongsTo(models.Candidate, {
             as: 'candidate',
             foreignKey: 'id_candidate',
@@ -67,8 +64,8 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'id_project',
         })
     }
-    
+
     // end config foreign key
-    
+
     return Project;
 }
