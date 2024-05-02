@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const { Op } = require("sequelize");
 const jwt = require('jsonwebtoken');
 const { body } = require('express-validator');
-
+const nodemailer = require('nodemailer');
 
 const secretAccessToken = process.env.ACCESS_TOKEN_SECRET || 'access-token';
 const expireAccessToken  = process.env.ACCESS_TOKEN_SECRET_EXPIRE || '1d'
@@ -79,6 +79,117 @@ const AuthController = {
                 code:200, 
                 message: 'resgister ok!',
                 data:newUser
+            })
+        }catch(error){
+            console.log(`ERROR: ${error}`);
+            res.json({
+                code:500,
+                message: error.message || error
+            })
+        }
+    },
+    sendVerification:async (req, res) =>{
+        try{
+            const { email } = req.body;
+            const verificationCode = Math.floor(100000 + Math.random() * 900000);
+            const field = null; // list field
+            const condition = {}; // conditon query
+            condition.email = {
+                [Op.eq]: req.body.email
+            }
+            const passwordResetToken = await models.PasswordResetToken.getOne({
+                field, 
+                where: condition
+            });
+            let newPasswordResetToken
+            if(!passwordResetToken){
+                newPasswordResetToken = await models.PasswordResetToken.createOne({
+                    email:req.body.email,
+                    token: verificationCode,
+                    created_at: new Date()
+                });
+            }else{
+                const data = {
+                    email:req.body.email,
+                    token: verificationCode,
+                    created_at: new Date()
+                };
+                
+                newPasswordResetToken = await models.PasswordResetToken.updateMany(data, condition);
+            }
+            console.log('verificationCode', verificationCode, passwordResetToken);
+            if(newPasswordResetToken){
+                // send email
+                const transporter = nodemailer.createTransport({
+                    service: process.env.SERVICE_GMAL || 'gmail',
+                    auth: {
+                        user: process.env.GMAIL_ACC || 'mnorelply@gmail.com',
+                        pass: process.env.GMAIL_PASS || 'hklzjnjiubayrlys'
+                    }
+                });
+
+                const mailOptions = {
+                    from: process.env.GMAIL_ACC || 'mnorelply@gmail.com',
+                    to: email,
+                    subject: 'Verification Code',
+                    text: `Your verification code is: ${verificationCode}`
+                  };
+                transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    // console.log(error);
+                    res.json({
+                        code:500,
+                        message: 'Error sending verification email' + error.message || error
+                    });
+                } else {
+                    // console.log('Email sent: ' + info.response);
+                    res.json({
+                        code:200,
+                        message: 'Verification email sent'
+                    });
+                }
+                });
+              
+            }
+        }catch(error){
+            console.log(`ERROR: ${error}`);
+            res.json({
+                code:500,
+                message: error.message || error
+            })
+        }
+    },
+    verifyCode: async (req, res) =>{
+        try{
+            const { email, code } = req.body;
+            const field = null; // list field
+            const condition = {}; // conditon query
+            condition.email = {
+                [Op.eq]: req.body.email
+            }
+            condition.token = {
+                [Op.eq]: req.body.code
+            }
+            const time_expire = new Date(new Date().getTime() - 5 * 60 * 1000); //df 5 minutes + 7 for UTC
+            condition.created_at = {
+                [Op.gte]: time_expire
+            }
+            const verification = await models.PasswordResetToken.getOne({
+                field, 
+                where: condition
+            });
+            if(!verification){
+                return res.json({
+                    code: 500,
+                    message: 'Invalid verification code'
+                })
+            }
+            console.log(verification);
+            // verify success - delete record db
+            await models.PasswordResetToken.delete({where:condition });
+            res.json({
+                code: 200,
+                message: 'Verification successful'
             })
         }catch(error){
             console.log(`ERROR: ${error}`);

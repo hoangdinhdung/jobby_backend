@@ -43,7 +43,7 @@ module.exports = {
       "database": process.env.DB_NAME,
       "host": process.env.DB_HOST,
       "dialect": "jobby_db",
-      //"logging": false,
+      "logging": false,
       "define": {
         "underscored": true
       }
