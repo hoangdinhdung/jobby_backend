@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 exports.validateLogin = [
     body('email')
       .notEmpty().withMessage('Email không được để trống')
-        .isEmail().withMessage('Email không hợp lệ'),
+      .isEmail().withMessage('Email không hợp lệ'),
     body('password')
         .notEmpty().withMessage('Mật khẩu không được để trống'),
     (req, res, next) => {

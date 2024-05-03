@@ -23,7 +23,8 @@ module.exports = {
       "dialect": "mysql",
       //"logging": false,
       "define": {
-        "underscored": true
+        "underscored": false,
+        "timestamps": false
       }
     },
     "test": {
@@ -34,7 +35,8 @@ module.exports = {
       "dialect": "mysql",
       //"logging": false,
       "define": {
-        "underscored": true
+        "underscored": false,
+        "timestamps": false
       }
     },
     "production": {
@@ -45,7 +47,8 @@ module.exports = {
       "dialect": "jobby_db",
       "logging": false,
       "define": {
-        "underscored": true
+        "underscored": false,
+        "timestamps": false
       }
     }
   }

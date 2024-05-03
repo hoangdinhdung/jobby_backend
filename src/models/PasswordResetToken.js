@@ -11,14 +11,16 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false, // not null
         },
         created_at: {
-            type: DataTypes.DATE, // type date
+            type: DataTypes.DATE, // type TIMESTAMP 
+            allowNull: true //  null
+        },
+        deleted_at: {
+            type: DataTypes.DATE, // type TIMESTAMP 
             allowNull: true //  null
         },
     }
     const config = {
         tableName: 'password_reset_tokens',
-        underscored: false,
-        timestamps: false,
         defaultScope: {
             attributes: { exclude: ['id'] } // exclude id
         }
@@ -59,6 +61,6 @@ module.exports = (sequelize, DataTypes) => {
         }
         return await PasswordResetToken.destroy(cond);
     }
-    PasswordResetToken.sync();// create table if not exist
+    // PasswordResetToken.sync({ alter: true })// create table if not exist
     return PasswordResetToken;
 }

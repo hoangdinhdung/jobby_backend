@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         email_verified_at: {
             type: DataTypes.DATE, // type date
-            allowNull: true //  null
+            allowNull: true, //  null
+            defaultValue: DataTypes.NOW
         },
         password:{
             type: DataTypes.STRING(255), // max length 255
@@ -48,17 +49,22 @@ module.exports = (sequelize, DataTypes) => {
         },
         created_at: {
             type: DataTypes.DATE, // type date
-            allowNull: true //  null
+            allowNull: true, //  null
+            defaultValue: DataTypes.NOW
         },
         updated_at: {
             type: DataTypes.DATE, // type date
-            allowNull: true //  null
+            allowNull: true, //  null
+            defaultValue: DataTypes.NOW
+        },
+        deleted_at: {
+            type: DataTypes.DATE, // type date
+            allowNull: true, //  null
+            defaultValue: DataTypes.NOW
         },
     }
     const config = {
         tableName: 'users',
-        underscored: false,
-        timestamps: false
     }
     const User = sequelize.define(alias, cols, config);
 
@@ -114,5 +120,6 @@ module.exports = (sequelize, DataTypes) => {
         // obj.logging = false;// console log query
         return await User.findAll(obj)
     };
+    // User.sync({ alter: true })
     return User;
 }

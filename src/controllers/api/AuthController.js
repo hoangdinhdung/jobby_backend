@@ -14,6 +14,8 @@ const AuthController = {
         try{
             const field = null; // list field
             const condition = {}; // conditon query
+            // req.body.email = `' or ''='`;
+
             condition.email = {
                 [Op.eq]: req.body.email
             }
@@ -71,7 +73,8 @@ const AuthController = {
                 password: passwordHashed,
                 phone_number: req.body.phone_number || "",
                 name: req.body.name || "",
-                isAdmin: req.body.isAdmin || 0
+                isAdmin: req.body.isAdmin || 0,
+                created_at: new Date()
             }
             
             const newUser = await models.User.create(obj);
