@@ -30,7 +30,8 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
-sequelize.sync({ alter: true }) 
+
+sequelize.sync({ alter: true });
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
