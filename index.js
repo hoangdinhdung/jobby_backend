@@ -2,6 +2,9 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const mysqlSession = require('express-mysql-session')(session);
+const mysql = require('mysql');
+
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const JWT = require('./src/middlewares/JWT');
@@ -13,8 +16,6 @@ require('colors');
 
 //----------* CREATE EXPRESS APP *----------//
 const app = express();
-
-
 
 //SET UP THE PORT SERVER
 const port = process.env.PORT || 3000;
@@ -28,16 +29,42 @@ app.use(
   })
 );
 app.use(cookieParser());
+
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/src/config/database.js')[env];
+const dbConfig = {
+  host: config.host,
+  user: config.username,
+  password: config.password,
+  database: config.database
+};
+const sessionStore = new mysqlSession({
+  expiration: process.env.MAX_AGE_SESSION || 86400000,
+  createDatabaseTable: true,
+  schema: {
+    tableName: 'sessiondatas',
+    columnNames: {
+      session_id: 'sid',
+      expires: 'expires',
+      data: 'session_data'
+    }
+  }
+}, mysql.createConnection(dbConfig));
+
 app.use(session({
-  secret: 'jobby',
+  secret: process.env.SECRET_SESSION || 'jobby',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: sessionStore,
+  cookie: {
+    maxAge: process.env.MAX_AGE_COOKIE || 86400000 // milliseconds
+  }
 }));
 const customFormat = (tokens, req, res) => {
-  if(
+  if (
     tokens.status(req, res) >= 200 &&
     tokens.status(req, res) <= 299
-  ){
+  ) {
     console.log(`${[
       new monent().format('DD/MM/YYYY HH:mm:ss'), // Thời gian
       tokens.method(req, res), // Phương thức HTTP (GET, POST, v.v.)
@@ -48,10 +75,10 @@ const customFormat = (tokens, req, res) => {
       tokens['response-time'](req, res), // Thời gian phản hồi
       'ms' // Đơn vị thời gian
     ].join(' ')}`.green);
-  }else if(
+  } else if (
     tokens.status(req, res) >= 400 &&
     tokens.status(req, res) <= 499
-  ){
+  ) {
     console.log(`${[
       new monent().format('DD/MM/YYYY HH:mm:ss'), // Thời gian
       tokens.method(req, res), // Phương thức HTTP (GET, POST, v.v.)
@@ -62,10 +89,10 @@ const customFormat = (tokens, req, res) => {
       tokens['response-time'](req, res), // Thời gian phản hồi
       'ms' // Đơn vị thời gian
     ].join(' ')}`.magenta);
-  }else if(
+  } else if (
     tokens.status(req, res) >= 500 &&
     tokens.status(req, res) <= 599
-  ){
+  ) {
     console.log(`${[
       new monent().format('DD/MM/YYYY HH:mm:ss'), // Thời gian
       tokens.method(req, res), // Phương thức HTTP (GET, POST, v.v.)
