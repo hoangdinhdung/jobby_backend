@@ -9,16 +9,13 @@ const nodemailer = require('nodemailer');
 const secretAccessToken = process.env.ACCESS_TOKEN_SECRET || 'access-token';
 const expireAccessToken  = process.env.ACCESS_TOKEN_SECRET_EXPIRE || '1d'
 
-const UserController = {
+const BrandController = {
     list: async (req, res) =>{
         try{
             let {
                 page,
                 limit,
                 name,
-                email,
-                phone_number,
-                isAdmin,
                 created_at_from,
                 created_at_to,
                 updated_at_from,
@@ -34,21 +31,6 @@ const UserController = {
             if(name && name.trim() != ''){
                 condition.name = {
                     [Op.substring]: name
-                }
-            }
-            if(email && email.trim() != ''){
-                condition.email = {
-                    [Op.substring]: email
-                }
-            }
-            if(phone_number && phone_number.trim() != ''){
-                condition.phone_number = {
-                    [Op.substring]: phone_number
-                }
-            }
-            if(isAdmin){
-                condition.isAdmin = {
-                    [Op.eq]: isAdmin
                 }
             }
             if(created_at_from){
@@ -86,7 +68,7 @@ const UserController = {
                     [Op.eq]: null 
                 }
             }
-            const result = await models.User.getList({
+            const result = await models.Brand.getList({
                 where:condition,
                 attributes:field,
                 offset: (page - 1) * limit, 
@@ -112,7 +94,7 @@ const UserController = {
             condition.id = {
                 [Op.eq]: id
             };
-            let users = await models.User.getAllUser({
+            let users = await models.Brand.getAll({
                 where:condition
             });
             const user = users && users[0] || null;
@@ -120,6 +102,26 @@ const UserController = {
                 code: 200,
                 message: 'get one success',
                 data: user
+            });
+        }catch(error){
+            console.log(`ERROR: ${error}`);
+            res.status(500).send({
+                code:500,
+                message: error.message || error
+            })
+        }
+    },
+    create: async (req, res) =>{
+        try{
+            const { name } = req.body;
+            const payload = {};
+            payload.name = name;
+            payload.created_at = new Date();
+            const brand = await models.Brand.create(payload);
+            res.json({
+                code:200,
+                message: 'Tạo brand thành công.',
+                data: brand
             });
         }catch(error){
             console.log(`ERROR: ${error}`);
@@ -142,15 +144,13 @@ const UserController = {
                     }
                 }
             });
-            if(payload.password){
-                payload.password = bcrypt.hashSync(payload.password, 5);
-            }
+            payload.updated_at = new Date();
             const condition = {};
             condition.id = {
                 [Op.eq]: req.params.id
             };
-            const updateUser = await models.User.updateMany(payload, condition);
-            if(updateUser){
+            const updateBrand = await models.Brand.updateMany(payload, condition);
+            if(updateBrand){
                 res.json({
                     code:200,
                     message: "Cập nhật thông tin thành công."
@@ -174,16 +174,16 @@ const UserController = {
             condition.id = {
                 [Op.eq]: id
             }
-            const deleted = await models.User.updateMany(payload, condition);
+            const deleted = await models.Brand.updateMany(payload, condition);
             if(deleted){
                 res.json({
                     code: 200,
-                    message: "Xoá người dùng thành công."
+                    message: "Xoá brand thành công."
                 })
             }else{
                 res.status(500).send({
                     code:500,
-                    essage: "Xoá người dùng không thành công."
+                    essage: "Xoá brand không thành công."
                 })
             }
         }catch(error){
@@ -204,16 +204,16 @@ const UserController = {
             condition.id = {
                 [Op.in]: ids
             }
-            const deleted = await models.User.updateMany(payload, condition);
+            const deleted = await models.Brand.updateMany(payload, condition);
             if(deleted){
                 res.json({
                     code: 200,
-                    message: "Xoá nhiều người dùng thành công."
+                    message: "Xoá nhiều brand thành công."
                 })
             }else{
                 res.status(500).send({
                     code:500,
-                    essage: "Xoá nhiều người dùng không thành công."
+                    essage: "Xoá nhiều brand không thành công."
                 })
             }
         }catch(error){
@@ -234,16 +234,16 @@ const UserController = {
             condition.id = {
                 [Op.eq]: id
             }
-            const deleted = await models.User.updateMany(payload, condition);
+            const deleted = await models.Brand.updateMany(payload, condition);
             if(deleted){
                 res.json({
                     code: 200,
-                    message: "Phục hồi người dùng thành công."
+                    message: "Phục hồi brand thành công."
                 })
             }else{
                 res.status(500).send({
                     code:500,
-                    essage: "Phục hồi người dùng không thành công."
+                    essage: "Phục hồi brand không thành công."
                 })
             }
         }catch(error){
@@ -264,16 +264,16 @@ const UserController = {
             condition.id = {
                 [Op.in]: ids
             }
-            const deleted = await models.User.updateMany(payload, condition);
+            const deleted = await models.Brand.updateMany(payload, condition);
             if(deleted){
                 res.json({
                     code: 200,
-                    message: "Phục hồi nhiều người dùng thành công."
+                    message: "Phục hồi nhiều brand thành công."
                 })
             }else{
                 res.status(500).send({
                     code:500,
-                    essage: "Phục hồi nhiều người dùng không thành công."
+                    essage: "Phục hồi nhiều brand không thành công."
                 })
             }
         }catch(error){
@@ -286,4 +286,4 @@ const UserController = {
     },
 }
 
-module.exports = UserController;
+module.exports = BrandController;

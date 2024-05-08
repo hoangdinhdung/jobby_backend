@@ -12,11 +12,13 @@ const {
     validateDeleteUser,
     validateDeleteManyUser,
     validateRestoreUser,
-    validateRestoreManyUser
+    validateRestoreManyUser,
+    validateGetOneUser
 } = require("../../middlewares/validate");
 
 //ROUTES
 router.get('/get-list', validateGetListUser, userController.list);
+router.get('/get-one/:id', validateGetOneUser, userController.getOne);
 router.put('/edit/:id', validateUpdateUser, userController.update);
 router.delete('/delete-one/:id', validateDeleteUser, userController.delete);
 router.delete('/delete-many', validateDeleteManyUser, userController.deleteMany);
