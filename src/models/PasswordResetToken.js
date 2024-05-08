@@ -1,4 +1,6 @@
 require('dotenv').config(); 
+const Core = require('./Core');
+
 module.exports = (sequelize, DataTypes) => {
     const alias = 'PasswordResetToken';
     const cols = {
@@ -25,42 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             attributes: { exclude: ['id'] } // exclude id
         }
     }
-    const PasswordResetToken = sequelize.define(alias, cols, config);
 
-    PasswordResetToken.getOne = async function(payload){
-        const obj = {};
-        if(payload.attributes && payload.attributes.length > 0){
-            obj.attributes = payload.attributes;
-        }
-        if(payload.where){
-            obj.where = payload.where;
-        }
-        // obj.logging = false;// false if you don't want to console log query
-        obj.raw = true;
-        return await PasswordResetToken.findOne(obj)
-    }
-    PasswordResetToken.createOne = async function(payload){
-        const options = {};
-        // options.logging = false; // false if you don't want to console log query
-        return await PasswordResetToken.create(payload, options);
-    }
-    PasswordResetToken.updateMany = async function(payload, condition){
-        const options = {};
-        const cond = {};
-        // cond.logging = false; // false if you don't want to console log query
-        if(condition){
-            cond.where = condition;
-        }
-        return await PasswordResetToken.update(payload, cond, options);
-    }
-    PasswordResetToken.delete = async function(payload){
-        const cond = {};
-        // cond.logging = false; // false if you don't want to console log query
-        if(payload.where){
-            cond.where = payload.where;
-        }
-        return await PasswordResetToken.destroy(cond);
-    }
-    // PasswordResetToken.sync({ alter: true })// create table if not exist
+    const PasswordResetToken = Core(sequelize, DataTypes, alias, cols, config);
     return PasswordResetToken;
 }
