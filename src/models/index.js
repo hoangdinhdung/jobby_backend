@@ -21,8 +21,13 @@ fs
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
-    const model = require('./' + file)(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+    try {
+      // try to require model-if error => skip
+      const model = require('./' + file)(sequelize, Sequelize.DataTypes);
+      db[model.name] = model;
+    } catch (error) {
+      
+    }
   });
 
 Object.keys(db).forEach(modelName => {

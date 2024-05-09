@@ -11,7 +11,7 @@ const {
     validateRegister,
     validateSendVerificaton,
     validateVerifyCode
-} = require("../../middlewares/validate");
+} = require("../../middlewares/validate/index");
 
 //ROUTES
 router.post('/login', validateLogin, authController.login);

@@ -120,7 +120,7 @@ const AuthController = {
                 
                 newPasswordResetToken = await models.PasswordResetToken.updateMany(data, condition);
             }
-            console.log('verificationCode', verificationCode, passwordResetToken);
+            // console.log('verificationCode', verificationCode, passwordResetToken);
             if(newPasswordResetToken){
                 // send email
                 const transporter = nodemailer.createTransport({
@@ -187,7 +187,7 @@ const AuthController = {
                     message: 'Invalid verification code'
                 })
             }
-            console.log(verification);
+            // console.log(verification);
             // verify success - delete record db
             await models.PasswordResetToken.delete({where:condition });
             res.json({

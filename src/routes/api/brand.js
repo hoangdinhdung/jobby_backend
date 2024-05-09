@@ -15,7 +15,7 @@ const {
     validateRestoreManyBrand,
     validateGetOneBrand,
     validateCreateBrand
-} = require("../../middlewares/validate");
+} = require("../../middlewares/validate/index");
 
 //ROUTES
 router.get('/get-list', validateGetListBrand, brandController.list);

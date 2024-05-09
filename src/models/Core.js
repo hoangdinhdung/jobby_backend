@@ -37,6 +37,24 @@ module.exports = (sequelize, DataTypes, alias, cols, config) => {
         }
     };
     
+    Core.getOne = async function(payload){
+        const obj = {};
+        if(payload.attributes && payload.attributes.length > 0){
+            obj.attributes = payload.attributes;
+        }
+        if(payload.where){
+            obj.where = payload.where;
+        }
+        // obj.logging = false;// false if you don't want to console log query
+        obj.raw = true;
+        return await Core.findOne(obj)
+    }
+
+    Core.createOne = async function(payload){
+        const options = {};
+        // options.logging = false; // false if you don't want to console log query
+        return await Core.create(payload, options);
+    }
     Core.getList = async function(payload) {
         const obj = {};
         if(payload.attributes && payload.attributes.length > 0){
@@ -73,6 +91,5 @@ module.exports = (sequelize, DataTypes, alias, cols, config) => {
         }
         return await Core.destroy(cond);
     }
-
     return Core;
 };

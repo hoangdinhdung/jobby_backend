@@ -14,7 +14,7 @@ const {
     validateRestoreUser,
     validateRestoreManyUser,
     validateGetOneUser
-} = require("../../middlewares/validate");
+} = require("../../middlewares/validate/index");
 
 //ROUTES
 router.get('/get-list', validateGetListUser, userController.list);
