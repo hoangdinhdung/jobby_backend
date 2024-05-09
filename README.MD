@@ -11,12 +11,12 @@
 ## Using
 
 ## Contribution
-If you want to contribute to the project, follow these steps:
-    + Fork the project.
-    + Create a new branch (git checkout -b feature).
-    + Commit your changes (git commit -am 'Add feature').
-    + Push your branch to your fork (git push origin feature).
-    + Create a new pull request."
+    If you want to contribute to the project, follow these steps:
+        + Fork the project.
+        + Create a new branch (git checkout -b feature).
+        + Commit your changes (git commit -am 'Add feature').
+        + Push your branch to your fork (git push origin feature).
+        + Create a new pull request."
 ## Note
     Make sure your SSH key has been added to the project.
 ## Author
